@@ -4,7 +4,7 @@ you are free to change anything you want in the code ! Make a pull request and I
 
 ## Coding style
 - Use "_" prefix for class attributes,
-- If an attribute is static, it should be written THIS_WAY, without "_" as prefix,
+- If an attribute or a variable is final, it should be written THIS_WAY, without "_" as prefix,
 - Name the methods this way : "itIsSomething()" and not this way "it_is_something()" ,
 - The getters must have "get" prefix, and then the exact name of the variable : "getHealth()" for "_health",
 - If the variable is a boolean, then the getter should be written this way : "isAlive()" for "_alive",
