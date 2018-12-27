@@ -9,6 +9,12 @@ public class Renderer {
 
     private static GLWindow window = null;
 
+    public static int SCREEN_WIDTH = 640;
+    public static int SCREEN_HEIGHT = 360;
+
+    // Tells how many units will fit in the width of the window : can be used to zoom in (--) or out (++)
+    public static float UNITS_WIDE = 10;
+
     public static void init(){
         GLProfile.initSingleton();
         // We tell what version we will use (not the most recent, but it has all we want)
@@ -16,7 +22,7 @@ public class Renderer {
         GLCapabilities caps = new GLCapabilities(profile);
 
         window = GLWindow.create(caps);
-        window.setSize(640, 360);
+        window.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         window.setResizable(false);
 
         window.addGLEventListener(new EventListener());
@@ -26,6 +32,14 @@ public class Renderer {
         animator.start();
 
         window.setVisible(true);
+    }
+
+    public static int getWindowWidth(){
+        return window.getWidth();
+    }
+
+    public static int getWindowHeight(){
+        return window.getHeight();
     }
 
     public static void main(String[] args){
