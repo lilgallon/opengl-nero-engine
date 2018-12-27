@@ -4,7 +4,7 @@
 ![release](https://img.shields.io/github/release/n3roo/nero-engine.svg) ![tag](https://img.shields.io/github/tag/n3roo/nero-engine.svg) ![issues](https://img.shields.io/github/issues/n3roo/nero-engine.svg) ![license](https://img.shields.io/github/license/n3roo/nero-engine.svg) ![Progression](https://img.shields.io/badge/Progression-0%25-red.svg)
 
 A java game engine powered by OpenGL. Credits go to the tutorials of [Sam Parker](https://www.youtube.com/channel/UCW-0slcL8cidzwxwndpP9WQ).
-I started the development of the engine thanks to these. Here are the [youtube videos](https://www.youtube.com/watch?v=etNPl3Dk2XY&list=PL9a_05IxzbrctpcWdVyVaF9AO0vn4WD4J).
+I started the development thanks to these [youtube videos](https://www.youtube.com/watch?v=etNPl3Dk2XY&list=PL9a_05IxzbrctpcWdVyVaF9AO0vn4WD4J).
 
 ## 1. Todo list
 
@@ -12,8 +12,8 @@ This list may change at any moment, but it gives an idea of what is planned.
 
 **Game engine : level 1**
 - [x] Window creation
-- [x] Event listener
-- [x] Mouse listener
+- [ ] Event listener
+- [ ] Mouse listener
 - [ ] Utility class to draw
 - [ ] Keyboard listener
 - [ ] Game loop
