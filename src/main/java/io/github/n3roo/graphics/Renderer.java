@@ -25,19 +25,20 @@ public class Renderer {
         _window.addGLEventListener(new EventListener());
         _window.addMouseListener(new MouseInput());
 
-        FPSAnimator animator = new FPSAnimator(_window, 60);
-        animator.start();
-
         _window.setFullscreen(true);
         _window.setVisible(true);
         _window.requestFocus(); // this is what photoshop spams when it starts
     }
 
-    public static GLProfile getProfile(){
-        return _profile;
+    public static void render(){
+        if(_window == null){
+            return;
+        }
+
+        _window.display();
     }
 
-    public static void main(String[] args){
-        init();
+    public static GLProfile getProfile(){
+        return _profile;
     }
 }
