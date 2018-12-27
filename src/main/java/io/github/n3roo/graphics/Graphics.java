@@ -10,9 +10,12 @@ public class Graphics {
     private static float blue = 1;
     private static float alpha = 1;
 
+    // Rotation in degrees (clockwise)
+    private static float rotation = 0;
+
     /**
-     * It fills a rectangle (width ; height) at the defined position (x ; y).
-     * The position is the top left corner.
+     * It draws a rectangle (width ; height).
+     * The position is the middle of the rectangle.
      * @param x
      * @param y
      * @param width
@@ -21,13 +24,22 @@ public class Graphics {
     public static void fillRect(float x, float y, float width, float height){
         GL2 gl = EventListener.gl;
 
+        // Rotate the openGL context
+        gl.glTranslatef(x, y, 0);
+        gl.glRotatef(- rotation, 0, 0, 1);
+
+        // Draw the rectangle
         gl.glColor4f(red, green, blue, alpha);
         gl.glBegin(GL2.GL_QUADS);
-            gl.glVertex2f(x, y);
-            gl.glVertex2f(x + width, y);
-            gl.glVertex2f(x + width, y + height);
-            gl.glVertex2f(x, y + height);
+        gl.glVertex2f(- width / 2, - height / 2);
+        gl.glVertex2f(  width / 2, - height / 2);
+        gl.glVertex2f(  width / 2,   height / 2);
+        gl.glVertex2f(- width / 2,   height / 2);
         gl.glEnd();
+
+        // Restore the openGL context
+        gl.glRotatef(rotation, 0, 0, 1);
+        gl.glTranslatef(- x, - y, 0);
     }
 
     /**
@@ -43,6 +55,14 @@ public class Graphics {
         green = Math.max(0, Math.min(1, g));
         blue = Math.max(0, Math.min(1, b));
         alpha = Math.max(0, Math.min(1, a));
+    }
+
+    /**
+     * Rotates the shapes (clockwise).
+     * @param r rotation in degrees [0; 360[.
+     */
+    public static void setRotation(float r){
+        rotation = r;
     }
 
 }

@@ -13,7 +13,7 @@ public class EventListener implements GLEventListener {
         GL2 gl = drawable.getGL().getGL2();
 
         // r g b a -> color we want to use to clear the screen : glClear(..)
-        gl.glClearColor(1, 0, 0, 1);
+        gl.glClearColor(0, 0, 0, 1);
     }
 
     // Every time
@@ -21,7 +21,7 @@ public class EventListener implements GLEventListener {
         gl = drawable.getGL().getGL2();
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
 
-        Graphics.setColor(1, 0, 1, 1);
+        Graphics.setColor(0, 1, 0, 1);
         Graphics.fillRect(0,0, 1, 1);
     }
 
