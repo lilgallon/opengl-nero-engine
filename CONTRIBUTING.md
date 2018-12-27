@@ -38,7 +38,7 @@ Use this syntax to write your commits :
     - ...
 - Subject : contains a brief description of the changes
     - Using the present imperative ("change", not "changed" or "changes"),
-    - Without any majuscule at the start,
+    - Without any capital letter at the start,
     - Without "." at the end.
 - Description : allows for a deeper insight into the motives behind the change. The rules are the same as for the subject part.
 - Footer : contains important changes (Breaking Changes) and references to GitHub issues.

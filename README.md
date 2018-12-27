@@ -21,7 +21,7 @@ This list may change at any moment, but it gives an idea of what is planned.
 - [ ] Physics
 - [ ] User input handling
 - [ ] File manager
-- [ ] HUD (entities-related : health abr for exemple)
+- [ ] HUD (entities-related : health abr for example)
 - [ ] Splash screen
 - [ ] GUI (game-related : buttons for example)
 
