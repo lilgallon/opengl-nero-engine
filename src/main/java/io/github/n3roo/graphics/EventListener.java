@@ -3,10 +3,12 @@ package io.github.n3roo.graphics;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
+import io.github.n3roo.resources.ImageResource;
 
 public class EventListener implements GLEventListener {
 
     public static GL2 gl = null;
+    public static ImageResource image = null;
 
     // When it starts
     public void init(GLAutoDrawable drawable) {
@@ -14,15 +16,19 @@ public class EventListener implements GLEventListener {
 
         // r g b a -> color we want to use to clear the screen : glClear(..)
         gl.glClearColor(0, 0, 0, 1);
+
+        gl.glEnable(GL2.GL_TEXTURE_2D);
+
+        image = new ImageResource("logo.png");
     }
 
     // Every time
     public void display(GLAutoDrawable drawable) {
         gl = drawable.getGL().getGL2();
+
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
 
-        Graphics.setColor(0, 1, 0, 1);
-        Graphics.fillRect(0,0, 1, 1);
+        Graphics.drawImage(image, 0, 0, 1, 1);
     }
 
     // When the window size changes

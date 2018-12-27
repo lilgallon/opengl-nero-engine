@@ -8,6 +8,7 @@ import io.github.n3roo.input.MouseInput;
 
 public class Renderer {
 
+    private static GLProfile profile = null;
     private static GLWindow window = null;
 
     // Tells how many units will fit in the width of the window : can be used to zoom in (--) or out (++)
@@ -15,7 +16,7 @@ public class Renderer {
 
     public static void init(){
         GLProfile.initSingleton();
-        GLProfile profile = GLProfile.get(GLProfile.GL2);
+        profile = GLProfile.get(GLProfile.GL2);
         GLCapabilities caps = new GLCapabilities(profile);
 
         window = GLWindow.create(caps);
@@ -30,6 +31,10 @@ public class Renderer {
         window.setFullscreen(true);
         window.setVisible(true);
         window.requestFocus(); // this is what photoshop spams when it starts
+    }
+
+    public static GLProfile getProfile(){
+        return profile;
     }
 
     public static void main(String[] args){
