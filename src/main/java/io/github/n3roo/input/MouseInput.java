@@ -6,7 +6,7 @@ import com.jogamp.newt.event.MouseListener;
 public class MouseInput implements MouseListener {
     
     public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getX());
+
     }
 
     public void mouseEntered(MouseEvent e) {
