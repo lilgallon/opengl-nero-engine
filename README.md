@@ -1,5 +1,5 @@
 # Nero engine
-![header](https://n3roo.github.io/img/nero-engine-square.png)
+![header](https://n3roo.github.io/img/nero-engine-rect.png)
 
 ![release](https://img.shields.io/github/release/n3roo/nero-engine.svg) ![tag](https://img.shields.io/github/tag/n3roo/nero-engine.svg) ![issues](https://img.shields.io/github/issues/n3roo/nero-engine.svg) ![license](https://img.shields.io/github/license/n3roo/nero-engine.svg) ![Progression](https://img.shields.io/badge/Progression-0%25-red.svg)
 
