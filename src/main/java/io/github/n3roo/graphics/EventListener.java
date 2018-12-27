@@ -11,7 +11,7 @@ public class EventListener implements GLEventListener {
         GL2 gl = drawable.getGL().getGL2();
 
         // r g b a -> color we want to use to clear the screen : glClear(..)
-        gl.glClearColor(0, 0, 0, 1);
+        gl.glClearColor(1, 0, 0, 1);
     }
 
     // When it closes
@@ -42,7 +42,7 @@ public class EventListener implements GLEventListener {
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
 
-        float units_tall = Renderer.getWindowHeight() / (Renderer.getWindowWidth() / Renderer.UNITS_WIDE);
+        float units_tall = height / (width / Renderer.UNITS_WIDE);
 
         gl.glOrtho(- Renderer.UNITS_WIDE / 2, Renderer.UNITS_WIDE / 2, - units_tall / 2f, units_tall / 2f, -1, 1);
         gl.glMatrixMode(GL2.GL_MODELVIEW);
