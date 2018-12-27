@@ -4,6 +4,7 @@ import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.FPSAnimator;
+import io.github.n3roo.input.MouseInput;
 
 public class Renderer {
 
@@ -21,12 +22,14 @@ public class Renderer {
         window.setSize(640, 420);
         window.setResizable(false);
         window.addGLEventListener(new EventListener());
+        window.addMouseListener(new MouseInput());
 
         FPSAnimator animator = new FPSAnimator(window, 60);
         animator.start();
 
         window.setFullscreen(true);
         window.setVisible(true);
+        window.requestFocus(); // this is what photoshop spams when it starts
     }
 
     public static void main(String[] args){
