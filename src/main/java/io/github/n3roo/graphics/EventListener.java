@@ -28,15 +28,21 @@ public class EventListener implements GLEventListener {
 
         gl.glColor3f(0, 0, 1);
         gl.glBegin(GL2.GL_QUADS);
-            gl.glVertex2f(-0.5f, -0.5f);
-            gl.glVertex2f(0.5f, -0.5f);
-            gl.glVertex2f(0.5f, 0.5f);
-            gl.glVertex2f(-0.5f, 0.5f);
+            gl.glVertex2f(-50, -50);
+            gl.glVertex2f(50, -50);
+            gl.glVertex2f(50, 50);
+            gl.glVertex2f(-50, 50);
         gl.glEnd();
     }
 
-    public void reshape(GLAutoDrawable glAutoDrawable, int x, int y, int width, int height) {
-        // When the window size changes
+    // When the window size changes
+    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+        GL2 gl = drawable.getGL().getGL2();
 
+        gl.glMatrixMode(GL2.GL_PROJECTION);
+        gl.glLoadIdentity();
+
+        gl.glOrtho(- width / 2f, width / 2f, - height / 2f, height / 2f, -1, 1);
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
     }
 }

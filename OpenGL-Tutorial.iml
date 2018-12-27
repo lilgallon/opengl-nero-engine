@@ -37,31 +37,5 @@
     <orderEntry type="library" name="Maven: org.jogamp.jogl:jogl-all:natives-solaris-i586:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.jogamp.jogl:jogl-all:natives-windows-amd64:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.jogamp.jogl:jogl-all:natives-windows-i586:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl-main:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-android-aarch64:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-android-armv6:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-linux-amd64:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-linux-armv6:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-linux-armv6hf:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-linux-i586:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-macosx-universal:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-solaris-amd64:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-solaris-i586:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-windows-amd64:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.jocl:jocl:natives-windows-i586:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal-main:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-android-aarch64:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-android-armv6:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-linux-amd64:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-linux-armv6:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-linux-armv6hf:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-linux-i586:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-macosx-universal:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-solaris-amd64:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-solaris-i586:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-windows-amd64:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jogamp.joal:joal:natives-windows-i586:2.3.2" level="project" />
   </component>
 </module>
