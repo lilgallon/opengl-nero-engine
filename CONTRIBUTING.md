@@ -3,8 +3,8 @@ When contributing to this repository, please make sure that the following rules 
 you are free to change anything you want in the code ! Make a pull request and I will merge it - make sure to explain your changes ! :)
 
 ## Coding style
-- Use "_" prefix for class attributes,
-- If an attribute or a variable is final, it should be written THIS_WAY, without "_" as prefix,
+- The variables must be written this way : thisIsMyVariable,
+- If an attribute or a variable is final, it should be written THIS_WAY,
 - Name the methods this way : "itIsSomething()" and not this way "it_is_something()" ,
 - The getters must have "get" prefix, and then the exact name of the variable : "getHealth()" for "_health",
 - If the variable is a boolean, then the getter should be written this way : "isAlive()" for "_alive",

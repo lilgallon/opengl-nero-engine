@@ -4,44 +4,43 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 import io.github.n3roo.resources.ImageResource;
+import io.github.n3roo.world.World;
 
 public class EventListener implements GLEventListener {
 
-    public static GL2 _gl = null;
-    public static ImageResource _image = null;
+    public static GL2 gl = null;
+    public static ImageResource image = null;
 
     // When it starts
     public void init(GLAutoDrawable drawable) {
-        GL2 _gl = drawable.getGL().getGL2();
+        GL2 gl = drawable.getGL().getGL2();
 
         // r g b a -> color we want to use to clear the screen : glClear(..)
-        _gl.glClearColor(0, 0, 0, 1);
+        gl.glClearColor(0, 0, 0, 1);
 
-        _gl.glEnable(GL2.GL_TEXTURE_2D);
-
-        _image = new ImageResource("logo.png");
+        gl.glEnable(GL2.GL_TEXTURE_2D);
     }
 
     // Every time
     public void display(GLAutoDrawable drawable) {
-        _gl = drawable.getGL().getGL2();
+        gl = drawable.getGL().getGL2();
 
-        _gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
 
-        Graphics.drawImage(_image, 0, 0, 1, 1);
+        World.render();
     }
 
     // When the window size changes
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-        GL2 _gl = drawable.getGL().getGL2();
+        GL2 gl = drawable.getGL().getGL2();
 
-        _gl.glMatrixMode(GL2.GL_PROJECTION);
-        _gl.glLoadIdentity();
+        gl.glMatrixMode(GL2.GL_PROJECTION);
+        gl.glLoadIdentity();
 
         float units_tall = height / (width / Renderer.UNITS_WIDE);
 
-        _gl.glOrtho(- Renderer.UNITS_WIDE / 2, Renderer.UNITS_WIDE / 2, - units_tall / 2f, units_tall / 2f, -1, 1);
-        _gl.glMatrixMode(GL2.GL_MODELVIEW);
+        gl.glOrtho(- Renderer.UNITS_WIDE / 2, Renderer.UNITS_WIDE / 2, - units_tall / 2f, units_tall / 2f, -1, 1);
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
     }
 
     // When it closes

@@ -1,34 +1,61 @@
 package io.github.n3roo.engine;
 
 import io.github.n3roo.graphics.Renderer;
+import io.github.n3roo.world.World;
 
 public class GameLoop {
 
     private static boolean running = false;
 
-    private static int max_fps = 60;
-    private static int target_time = 1000000000 / max_fps; // nb of nanoseconds for one loop
+    private static int updates = 0;
+    // low value : smoother render in case of lag, but the game is slower
+    private static final int MAX_UPDATES = 5;
+
+    private static long lastUpdateTime = 0;
+
+    private static int targetFps = 60;
+    private static int targetTime = 1000000000 / targetFps; // nb of nanoseconds for one loop
 
     public static void start(){
         final Thread thread = new Thread(){
             public void run(){
                 running = true;
+                lastUpdateTime = System.nanoTime();
+
+                int fps = 0;
+                long lastFpsCheck = System.nanoTime();
 
                 while(running){
-                    long start_time = System.nanoTime();
+                    long startTime = System.nanoTime();
+                    updates = 0;
 
-                    // Poll input
+                    // if the difference between now and last time we updated is still greater or equal to the amount of
+                    // time that we are supposed to wait between updates -> we need an update
+                    while(startTime - lastUpdateTime >= targetTime){
+                        World.update();
+                        lastUpdateTime += targetTime;
+                        updates ++;
 
-                    // Update game
+                        if(updates > MAX_UPDATES){
+                            break;
+                        }
+                    }
 
-                    // Render game
                     Renderer.render();
 
-                    // It makes sure that the gameloop is not running too fast
-                    long time_taken = System.nanoTime() - start_time;
-                    if(time_taken < target_time){
+                    // Count and print fps
+                    fps ++;
+                    if(System.nanoTime() >= lastFpsCheck + 1000000000){
+                        System.out.println(fps);
+                        fps = 0;
+                        lastFpsCheck = System.nanoTime();
+                    }
+
+                    // Make sure that we don't go too fast
+                    long timeTaken = System.nanoTime() - startTime;
+                    if(timeTaken < targetTime){
                         try {
-                            Thread.sleep(target_time - time_taken / 1000000); // ms
+                            Thread.sleep((targetTime - timeTaken) / 1000000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
