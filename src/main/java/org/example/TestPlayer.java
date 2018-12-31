@@ -4,6 +4,7 @@ import com.jogamp.newt.event.KeyEvent;
 import io.github.n3roo.engine.GameLoop;
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.input.KeyInput;
+import io.github.n3roo.input.MouseInput;
 import io.github.n3roo.resources.ImageResource;
 import io.github.n3roo.world.GameObject;
 
@@ -22,24 +23,26 @@ public class TestPlayer extends GameObject {
         float xInput= 0;
         float yInput = 0;
 
-        if(KeyInput.getKey(KeyEvent.VK_LEFT)){
+        if(KeyInput.getKey(KeyEvent.VK_A)){
             xInput --;
         }
 
-        if(KeyInput.getKey(KeyEvent.VK_RIGHT)){
+        if(KeyInput.getKey(KeyEvent.VK_D)){
             xInput ++;
         }
 
-        if(KeyInput.getKey(KeyEvent.VK_UP)){
+        if(KeyInput.getKey(KeyEvent.VK_W)){
             yInput ++;
         }
 
-        if(KeyInput.getKey(KeyEvent.VK_DOWN)){
+        if(KeyInput.getKey(KeyEvent.VK_S)){
             yInput --;
         }
 
         x += xInput * GameLoop.updateDelta();
         y += yInput * GameLoop.updateDelta();
+
+        rotation = (float) Math.toDegrees(Math.atan2(MouseInput.getWorldX() - x, MouseInput.getWorldY() - y));
     }
 
 }

@@ -27,7 +27,9 @@ public class EventListener implements GLEventListener {
 
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
 
+        gl.glTranslatef(- Renderer.cameraX, - Renderer.cameraY, 0);
         World.render();
+        gl.glTranslatef(Renderer.cameraX, Renderer.cameraY, 0);
     }
 
     // When the window size changes
