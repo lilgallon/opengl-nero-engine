@@ -1,5 +1,8 @@
 package io.github.n3roo.world;
 
+import io.github.n3roo.graphics.Animation;
+import io.github.n3roo.graphics.Graphics;
+
 public class GameObject {
 
     // The position of the entity
@@ -13,12 +16,20 @@ public class GameObject {
     // The rotation (in degrees)
     public float rotation = 0;
 
+    // Animations
+    public Animation[] animations;
+    public int currentAnimation = 0;
+
     public void update(){
 
     }
 
     public void render(){
+        animations[currentAnimation].play();
 
+        Graphics.setRotation(rotation);
+        Graphics.drawImage(animations[currentAnimation].getImage(), x, y, width, height);
+        Graphics.setRotation(0);
     }
 
 }
