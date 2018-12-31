@@ -1,6 +1,9 @@
 package org.example;
 
+import com.jogamp.newt.event.KeyEvent;
+import io.github.n3roo.engine.GameLoop;
 import io.github.n3roo.graphics.Animation;
+import io.github.n3roo.input.KeyInput;
 import io.github.n3roo.resources.ImageResource;
 import io.github.n3roo.world.GameObject;
 
@@ -16,7 +19,27 @@ public class TestPlayer extends GameObject {
 
     @Override
     public void update(){
+        float xInput= 0;
+        float yInput = 0;
 
+        if(KeyInput.getKey(KeyEvent.VK_LEFT)){
+            xInput --;
+        }
+
+        if(KeyInput.getKey(KeyEvent.VK_RIGHT)){
+            xInput ++;
+        }
+
+        if(KeyInput.getKey(KeyEvent.VK_UP)){
+            yInput ++;
+        }
+
+        if(KeyInput.getKey(KeyEvent.VK_DOWN)){
+            yInput --;
+        }
+
+        x += xInput * GameLoop.updateDelta();
+        y += yInput * GameLoop.updateDelta();
     }
 
 }
