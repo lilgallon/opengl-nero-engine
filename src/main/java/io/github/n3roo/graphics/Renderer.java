@@ -3,6 +3,7 @@ package io.github.n3roo.graphics;
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
+import io.github.n3roo.input.KeyInput;
 import io.github.n3roo.input.MouseInput;
 
 public class Renderer {
@@ -23,6 +24,7 @@ public class Renderer {
         window.setResizable(false);
         window.addGLEventListener(new EventListener());
         window.addMouseListener(new MouseInput());
+        window.addKeyListener(new KeyInput());
 
         window.setFullscreen(true);
         window.setVisible(true);
