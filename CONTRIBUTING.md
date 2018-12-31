@@ -12,7 +12,8 @@ you are free to change anything you want in the code ! Make a pull request and I
 
 ## Commits syntax
 
-Use this syntax to write your commits :
+If you have no idea how to name your commits, please see this small guide.
+You are not obliged to follow this guide.
 
 ```
 <type>(<scope>): <subject>
