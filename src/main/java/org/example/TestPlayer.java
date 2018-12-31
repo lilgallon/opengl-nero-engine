@@ -8,14 +8,17 @@ import io.github.n3roo.input.MouseInput;
 import io.github.n3roo.resources.ImageResource;
 import io.github.n3roo.world.GameObject;
 
+import java.util.ArrayList;
+
 public class TestPlayer extends GameObject {
 
     public TestPlayer(){
+        ArrayList<String> sprites = new ArrayList<String>();
+        sprites.add("testsprite_1.png");
+        sprites.add("testsprite_2.png");
+
         animations = new Animation[1];
-        animations[0] = new Animation();
-        animations[0].frames = new ImageResource[2];
-        animations[0].frames[0] = new ImageResource("testsprite_1.png");
-        animations[0].frames[1] = new ImageResource("testsprite_2.png");
+        animations[0] = new Animation(sprites, 8);
     }
 
     @Override
