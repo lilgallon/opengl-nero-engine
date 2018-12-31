@@ -1,5 +1,7 @@
 package io.github.n3roo.graphics;
 
+import com.jogamp.newt.event.WindowAdapter;
+import com.jogamp.newt.event.WindowEvent;
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
@@ -28,6 +30,14 @@ public class Renderer {
         window.addGLEventListener(new EventListener());
         window.addMouseListener(new MouseInput());
         window.addKeyListener(new KeyInput());
+
+        window.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowDestroyNotify(WindowEvent arg0) {
+                // If we need to do stuff before closing, do it right here
+                System.exit(0);
+            }
+        });
 
         window.setFullscreen(true);
         window.setVisible(true);
