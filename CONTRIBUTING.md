@@ -13,7 +13,7 @@ you are free to change anything you want in the code ! Make a pull request and I
 ## Commits syntax
 
 If you have no idea how to name your commits, please see this small guide.
-You are not obliged to follow this guide.
+You are not required to follow this guide.
 
 ```
 <type>(<scope>): <subject>
