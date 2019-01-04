@@ -18,15 +18,17 @@ public class Graphics {
     /**
      * It draws a rectangle (width ; height).
      * The position is the middle of the rectangle.
-     * @param x
-     * @param y
-     * @param width
-     * @param height
+     * @param x horizontal position of the top left corner,
+     * @param y vertical position of the top left corner,
+     * @param width width of the rectangle,
+     * @param height height of the rectangle.
      */
+    @SuppressWarnings("Duplicates")
     public static void fillRect(float x, float y, float width, float height){
         GL2 gl = EventListener.gl;
 
         // Rotate the openGL context
+        // noinspection Duplicates
         gl.glTranslatef(x, y, 0);
         gl.glRotatef(- rotation, 0, 0, 1);
 
@@ -45,6 +47,15 @@ public class Graphics {
         gl.glTranslatef(- x, - y, 0);
     }
 
+    /**
+     * It draws an image to the screen. It is compatible with color changing.
+     * @param image the image to draw,
+     * @param x horizontal position of the top left corner,
+     * @param y vertical position of the top left corner,
+     * @param width width of the image,
+     * @param height height of the image,
+     */
+    @SuppressWarnings("Duplicates")
     public static void drawImage(ImageResource image, float x, float y, float width, float height){
         GL2 gl = EventListener.gl;
 

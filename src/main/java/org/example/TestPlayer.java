@@ -5,7 +5,6 @@ import io.github.n3roo.engine.GameLoop;
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.input.KeyInput;
 import io.github.n3roo.input.MouseInput;
-import io.github.n3roo.resources.ImageResource;
 import io.github.n3roo.world.GameObject;
 
 import java.util.ArrayList;
