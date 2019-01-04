@@ -17,6 +17,12 @@ public class ImageResource {
     // The buffered image of this image
     private BufferedImage image = null;
 
+    /**
+     * It reads the image and retrieve the texture.
+     * @param image_name the name of the image from res/images/ folder.
+     *                   For example, if your image is in /images/level/background.png, you should give
+     *                   "level/background.png".
+     */
     public ImageResource(String image_name){
         URL url = ImageResource.class.getResource("/images/" + image_name);
 
@@ -32,6 +38,9 @@ public class ImageResource {
         }
     }
 
+    /**
+     * @return the texture of the loaded image. It can return null if an error happened.
+     */
     public Texture getTexture(){
         if(image == null){
             return null;

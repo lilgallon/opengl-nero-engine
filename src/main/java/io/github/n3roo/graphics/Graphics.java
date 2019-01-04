@@ -53,7 +53,7 @@ public class Graphics {
      * @param x horizontal position of the top left corner,
      * @param y vertical position of the top left corner,
      * @param width width of the image,
-     * @param height height of the image,
+     * @param height height of the image.
      */
     @SuppressWarnings("Duplicates")
     public static void drawImage(ImageResource image, float x, float y, float width, float height){
