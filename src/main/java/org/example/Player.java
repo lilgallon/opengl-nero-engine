@@ -9,9 +9,9 @@ import io.github.n3roo.world.GameObject;
 
 import java.util.ArrayList;
 
-public class TestPlayer extends GameObject {
+public class Player extends GameObject {
 
-    public TestPlayer(){
+    public Player(){
         ArrayList<String> sprites = new ArrayList<String>();
         sprites.add("testsprite_1.png");
         sprites.add("testsprite_2.png");

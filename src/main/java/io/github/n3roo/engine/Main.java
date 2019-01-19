@@ -1,8 +1,7 @@
 package io.github.n3roo.engine;
 
 import io.github.n3roo.graphics.Renderer;
-import io.github.n3roo.world.World;
-import org.example.TestPlayer;
+import org.example.Game;
 
 public class Main {
 
@@ -10,7 +9,7 @@ public class Main {
         Renderer.init();
         GameLoop.start();
 
-        // Test code
-        World.addGameObject(new TestPlayer());
+        // User class
+        Game.start();
     }
 }
