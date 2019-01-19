@@ -31,6 +31,7 @@ public class KeyInput implements KeyListener {
      * @return true if the given key is being pressed.
      */
     public static boolean getKey(short keyCode){
-        return keys.get(keyCode);
+        Boolean isPressed = keys.get(keyCode);
+        return isPressed == null ? false : isPressed;
     }
 }
