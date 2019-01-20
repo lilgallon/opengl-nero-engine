@@ -15,7 +15,9 @@ public class KeyInput implements KeyListener {
      * @param keyEvent all the things about the event are stored in this variable.
      */
     public void keyPressed(KeyEvent keyEvent) {
-        keys.put(keyEvent.getKeyCode(), true);
+        if(!keyEvent.isAutoRepeat()) {
+            keys.put(keyEvent.getKeyCode(), true);
+        }
     }
 
     /**
@@ -23,7 +25,9 @@ public class KeyInput implements KeyListener {
      * @param keyEvent all the things about the event are stored in this variable.
      */
     public void keyReleased(KeyEvent keyEvent) {
-        keys.put(keyEvent.getKeyCode(), false);
+        if(!keyEvent.isAutoRepeat()) {
+            keys.put(keyEvent.getKeyCode(), false);
+        }
     }
 
     /**
