@@ -1,7 +1,12 @@
 package io.github.n3roo.world;
 
+import io.github.n3roo.math.Force;
+import io.github.n3roo.math.Vec2f;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class World {
 
@@ -12,11 +17,49 @@ public class World {
 
     private static long availableId = 0;
 
+    /**
+     * This variable is used to slow down the forces.
+     */
+    private static float friction = 0.95f;
+
     public static void update(){
 
         // Go through all the entities and update them
-        for(Map.Entry<Long, GameObject> gameObject : gameObjects.entrySet()){
-            gameObject.getValue().update();
+        for(Map.Entry<Long, GameObject> gameObjectEntry : gameObjects.entrySet()){
+            GameObject gameObject = gameObjectEntry.getValue();
+
+            // Force management
+            Vec2f movement = gameObject.getMovement();
+            // We need to apply friction before
+            movement.multiply(friction);
+            // Then we will check all the forces
+            Vec2f constantMovement = new Vec2f(0, 0);
+            Stack<Force> forces = gameObject.getForces();
+            ArrayList<Force> persistentForces = new ArrayList<Force>();
+            while(!forces.empty()){
+                Force force = forces.pop();
+                switch (force.getMode()){
+                    case Persistent:
+                        constantMovement.add(force.getVector());
+                        persistentForces.add(force);
+                        break;
+                    case Velocity:
+                        constantMovement.add(force.getVector());
+                        break;
+                    case Impulse:
+                        movement.add(force.getVector());
+                        break;
+                }
+            }
+            // Then, we can move
+            gameObject.move(constantMovement.add(movement));
+            // And set the current movement vector to the force vector containing all the impulse forces
+            gameObject.setMovement(movement);
+            // We put back all the persistent forces
+            forces.addAll(persistentForces);
+            gameObject.setForces(forces);
+
+            gameObject.update();
         }
     }
 

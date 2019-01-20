@@ -5,7 +5,9 @@ import io.github.n3roo.engine.GameLoop;
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.input.KeyInput;
 import io.github.n3roo.input.MouseInput;
-import io.github.n3roo.math.CollisionBox;
+import io.github.n3roo.math.Force;
+import io.github.n3roo.math.RigidBody;
+import io.github.n3roo.math.Vec2f;
 import io.github.n3roo.world.GameObject;
 
 import java.util.ArrayList;
@@ -42,14 +44,13 @@ public class Player extends GameObject {
             yInput --;
         }
 
-        x += xInput * GameLoop.updateDelta();
-        y += yInput * GameLoop.updateDelta();
+        addForce(new Vec2f(xInput * GameLoop.updateDelta(), yInput * GameLoop.updateDelta()), Force.Mode.Velocity);
 
-        rotation = (float) Math.toDegrees(Math.atan2(MouseInput.getWorldX() - x, MouseInput.getWorldY() - y));
+        rotation = (float) Math.toDegrees(Math.atan2(MouseInput.getWorldX() - position.x, MouseInput.getWorldY() - position.y));
     }
 
-    public CollisionBox getCollisionBox() {
-        return new CollisionBox(x, y, 1f, 0.5f);
+    public RigidBody getRigidBody() {
+        return new RigidBody(position.x, position.y, 1f, 0.5f);
     }
 
 }

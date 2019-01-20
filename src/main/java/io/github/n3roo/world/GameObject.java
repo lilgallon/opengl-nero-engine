@@ -2,24 +2,31 @@ package io.github.n3roo.world;
 
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.graphics.Graphics;
-import io.github.n3roo.math.CollisionBox;
+import io.github.n3roo.math.Force;
+import io.github.n3roo.math.RigidBody;
+import io.github.n3roo.math.Vec2f;
+
+import java.util.Stack;
 
 public abstract class GameObject {
 
     // The position of the entity
-    public float x = 0;
-    public float y = 0;
+    protected Vec2f position = new Vec2f(0, 0);
 
     // The site of the entity
-    public float width = 1;
-    public float height = 1;
+    protected float width = 1;
+    protected float height = 1;
 
     // The rotation (in degrees)
-    public float rotation = 0;
+    protected float rotation = 0;
 
     // Animations
-    public Animation[] animations;
-    public int currentAnimation = 0;
+    protected Animation[] animations;
+    protected int currentAnimation = 0;
+
+    // Force handling
+    protected Stack<Force> forces = new Stack<Force>();
+    protected Vec2f movement = new Vec2f(0, 0);
 
     public void update(){
 
@@ -30,14 +37,73 @@ public abstract class GameObject {
 
         Graphics.setRotation(rotation);
         Graphics.setColor(1, 1, 1, 1);
-        Graphics.drawImage(animations[currentAnimation].getImage(), x, y, width, height);
+        Graphics.drawImage(animations[currentAnimation].getImage(), position.x, position.y, width, height);
         Graphics.setRotation(0);
 
         Graphics.setColor(1, 0, 0, 1);
-        Graphics.fillStrokeRect(getCollisionBox().getX(),getCollisionBox().getY(),
-                getCollisionBox().getWidth(), getCollisionBox().getHeight(),
+        Graphics.fillStrokeRect(getRigidBody().getX(), getRigidBody().getY(),
+                getRigidBody().getWidth(), getRigidBody().getHeight(),
                 0.05f);
     }
 
-    abstract public CollisionBox getCollisionBox();
+    /**
+     * It adds a force to the game object.
+     * @param force the force to apply.
+     */
+    public void addForce(Force force){
+        forces.push(force);
+    }
+
+    /**
+     * It adds a force to the game object.
+     * @param vector the force vector,
+     * @param mode the force mode.
+     */
+    public void addForce(Vec2f vector, Force.Mode mode){
+        addForce(new Force(vector, mode));
+    }
+
+    public Stack<Force> getForces(){
+        return forces;
+    }
+
+    public void setForces(Stack<Force> forces){
+        this.forces = forces;
+    }
+
+    public void clearForces(){
+        forces = new Stack<Force>();
+    }
+
+    public void removePersistentForce(Force force){
+        if(force.getMode() == Force.Mode.Persistent){
+            forces.remove(force);
+        }else{
+            throw new IllegalArgumentException("Asked to remove a persistent force, but the force given is not persistent");
+        }
+    }
+
+    public Vec2f getMovement() {
+        return movement;
+    }
+
+    public void setMovement(Vec2f movement){
+        this.movement = movement;
+    }
+
+    public void move(Vec2f delta){
+        position.add(delta);
+    }
+
+    public void move(float dx, float dy){
+        move(new Vec2f(dx, dy));
+    }
+
+    /**
+     * The rigid body is a square. It is used to handle collision between objects.
+     * @return the rigid body of this game object, or null, if this object does not have any rigid body.
+     */
+    public RigidBody getRigidBody(){
+        return null;
+    }
 }

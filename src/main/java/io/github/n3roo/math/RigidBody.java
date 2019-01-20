@@ -1,6 +1,6 @@
 package io.github.n3roo.math;
 
-public class CollisionBox {
+public class RigidBody {
 
     private Vec2f position;
     private Vec2f dimensions;
@@ -12,12 +12,12 @@ public class CollisionBox {
      * @param width width of the collision box
      * @param height width of the collision box
      */
-    public CollisionBox(float x, float y, float width, float height){
+    public RigidBody(float x, float y, float width, float height){
         this.position = new Vec2f(x, y);
         this.dimensions = new Vec2f(width, height);
     }
 
-    public CollisionBox(Vec2f position, Vec2f dimensions){
+    public RigidBody(Vec2f position, Vec2f dimensions){
         this.position = position;
         this.dimensions = dimensions;
     }
