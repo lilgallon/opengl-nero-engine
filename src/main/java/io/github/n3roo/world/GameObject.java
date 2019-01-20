@@ -2,8 +2,9 @@ package io.github.n3roo.world;
 
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.graphics.Graphics;
+import io.github.n3roo.math.CollisionBox;
 
-public class GameObject {
+public abstract class GameObject {
 
     // The position of the entity
     public float x = 0;
@@ -28,8 +29,15 @@ public class GameObject {
         animations[currentAnimation].play();
 
         Graphics.setRotation(rotation);
+        Graphics.setColor(1, 1, 1, 1);
         Graphics.drawImage(animations[currentAnimation].getImage(), x, y, width, height);
         Graphics.setRotation(0);
+
+        Graphics.setColor(1, 0, 0, 1);
+        Graphics.fillStrokeRect(getCollisionBox().getX(),getCollisionBox().getY(),
+                getCollisionBox().getWidth(), getCollisionBox().getHeight(),
+                0.05f);
     }
 
+    abstract public CollisionBox getCollisionBox();
 }

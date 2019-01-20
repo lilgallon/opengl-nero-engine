@@ -39,7 +39,7 @@ public class Renderer {
             }
         });
 
-        window.setFullscreen(true);
+        // window.setFullscreen(true);
         window.setVisible(true);
         window.requestFocus(); // this is what photoshop spams when it starts
     }

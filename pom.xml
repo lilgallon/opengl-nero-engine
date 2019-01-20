@@ -6,7 +6,7 @@
 
     <groupId>io.github.n3roo</groupId>
     <artifactId>nero engine</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1</version>
 
     <dependencies>
         <dependency>

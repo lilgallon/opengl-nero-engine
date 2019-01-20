@@ -17,7 +17,7 @@ public class Graphics {
 
     /**
      * It draws a rectangle (width ; height).
-     * The position is the middle of the rectangle.
+     * The position is the center of the rectangle.
      * @param x horizontal position of the top left corner,
      * @param y vertical position of the top left corner,
      * @param width width of the rectangle,
@@ -35,16 +35,27 @@ public class Graphics {
         // Draw the rectangle
         gl.glColor4f(red, green, blue, alpha);
         gl.glBegin(GL2.GL_QUADS);
-        gl.glVertex2f(- width / 2, - height / 2);
-        gl.glVertex2f(  width / 2, - height / 2);
-        gl.glVertex2f(  width / 2,   height / 2);
-        gl.glVertex2f(- width / 2,   height / 2);
+        gl.glVertex2f(0, 0);
+        gl.glVertex2f( width, 0);
+        gl.glVertex2f(width,   height);
+        gl.glVertex2f(0,   height);
         gl.glEnd();
         gl.glFlush();
 
         // Restore the openGL context
         gl.glRotatef(rotation, 0, 0, 1);
         gl.glTranslatef(- x, - y, 0);
+    }
+
+    public static void fillStrokeRect(float x, float y, float width, float height, float thickness){
+        // top
+        fillRect(x, y, width, thickness);
+        // bottom
+        fillRect(x, y - height, width, - thickness);
+        // left
+        fillRect(x, y, - thickness, - height);
+        // right
+        fillRect(x + width, y, thickness, - height);
     }
 
     /**

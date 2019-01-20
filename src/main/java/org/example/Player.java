@@ -5,6 +5,7 @@ import io.github.n3roo.engine.GameLoop;
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.input.KeyInput;
 import io.github.n3roo.input.MouseInput;
+import io.github.n3roo.math.CollisionBox;
 import io.github.n3roo.world.GameObject;
 
 import java.util.ArrayList;
@@ -45,6 +46,10 @@ public class Player extends GameObject {
         y += yInput * GameLoop.updateDelta();
 
         rotation = (float) Math.toDegrees(Math.atan2(MouseInput.getWorldX() - x, MouseInput.getWorldY() - y));
+    }
+
+    public CollisionBox getCollisionBox() {
+        return new CollisionBox(x, y, 1f, 0.5f);
     }
 
 }
