@@ -3,16 +3,20 @@ package io.github.n3roo.graphics;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
-import io.github.n3roo.resources.ImageResource;
+import io.github.n3roo.engine.NeroEngine;
 import io.github.n3roo.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EventListener implements GLEventListener {
 
+    private static final Logger LOGGER = LogManager.getLogger(NeroEngine.class.getName());
+
     public static GL2 gl = null;
-    public static ImageResource image = null;
 
     // When it starts
     public void init(GLAutoDrawable drawable) {
+        LOGGER.debug("Setting up OpenGL settings");
         GL2 gl = drawable.getGL().getGL2();
 
         // r g b a -> color we want to use to clear the screen : glClear(..)
@@ -38,6 +42,7 @@ public class EventListener implements GLEventListener {
 
     // When the window size changes
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+        LOGGER.debug("Setting up OpenGL settings with the new window size");
         GL2 gl = drawable.getGL().getGL2();
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
