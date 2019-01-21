@@ -52,7 +52,8 @@ public class World {
                 }
             }
             // Then, we can move
-            gameObject.move(constantMovement.add(movement));
+            constantMovement.add(movement);
+            gameObject.move(constantMovement);
             // And set the current movement vector to the force vector containing all the impulse forces
             gameObject.setMovement(movement);
             // We put back all the persistent forces
