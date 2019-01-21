@@ -32,10 +32,11 @@ This list may change at any moment, but it gives an idea of what is planned.
 
 ## 2. Contributing
 
-Just fork the project and make the changes that you find necessary. I recommend you IntelliJ but any IDE works here.
+Just fork the project and make the changes that you find necessary. If you use IntelliJ, you just need to open the folder
+as a project. Then make sure to right click on "src/res" add "Mark Directory as" -> "Resources root".
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-## 3. Contributers
+## 3. Contributors
 - N3ROO - *Main developer* - [Github](https://github.com/N3ROO) - [Website](https://n3roo.github.io/)
 
 ## 4. License
