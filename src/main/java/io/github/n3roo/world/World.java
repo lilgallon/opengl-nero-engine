@@ -53,7 +53,7 @@ public class World {
             }
             // Then, we can move
             constantMovement.add(movement);
-            gameObject.move(constantMovement);
+            moveGameObject(gameObject, constantMovement);
             // And set the current movement vector to the force vector containing all the impulse forces
             gameObject.setMovement(movement);
             // We put back all the persistent forces
@@ -70,6 +70,21 @@ public class World {
         for(Map.Entry<Long, GameObject> gameObject : gameObjects.entrySet()){
             gameObject.getValue().render();
         }
+    }
+
+    /**
+     * It moves an object by taking in account collisions.
+     * @param go game object,
+     * @param vec movement vector.
+     */
+    private static void moveGameObject(GameObject go, Vec2f vec){
+        // We need to check if the game object as a rigid body, if it doesn't, we don't need to handle collision
+        if(go.getRigidBody() == null){
+            go.move(vec);
+        }
+
+        // Now we know that we need to handle collisions
+        // todo
     }
 
     /**
