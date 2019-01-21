@@ -15,9 +15,5 @@ public class NeroEngine {
 
         LOGGER.info("Starting gameloop");
         GameLoop.start();
-
-        // User class
-        LOGGER.info("Starting game");
-        Game.start();
     }
 }
