@@ -1,4 +1,6 @@
-package io.github.n3roo.math;
+package io.github.n3roo.world.components;
+
+import io.github.n3roo.math.Vec2f;
 
 public class RigidBody {
 
