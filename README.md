@@ -8,27 +8,7 @@ I started the development thanks to these [youtube videos](https://www.youtube.c
 
 ## 1. Todo list
 
-This list may change at any moment, but it gives an idea of what is planned.
-
-**Game engine : level 1**
-- [x] Window creation
-- [ ] Event listener
-- [ ] Mouse listener
-- [ ] Utility class to draw
-- [ ] Keyboard listener
-- [ ] Game loop
-- [ ] Entities
-- [ ] Physics
-- [ ] User input handling
-- [ ] File manager
-- [ ] HUD (entities-related : health abr for example)
-- [ ] Splash screen
-- [ ] GUI (game-related : buttons for example)
-
-**Game engine : level 2**
-- [ ] Discord integration
-- [ ] Particle system
-- [ ] xBox controller compatibility
+[Here](https://github.com/N3ROO/nero-engine/projects/1) is everything you need.
 
 ## 2. Contributing
 
