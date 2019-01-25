@@ -6,7 +6,7 @@ import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.input.KeyInput;
 import io.github.n3roo.input.MouseInput;
 import io.github.n3roo.math.Force;
-import io.github.n3roo.math.RigidBody;
+import io.github.n3roo.world.components.RigidBody;
 import io.github.n3roo.math.Vec2f;
 import io.github.n3roo.world.GameObject;
 

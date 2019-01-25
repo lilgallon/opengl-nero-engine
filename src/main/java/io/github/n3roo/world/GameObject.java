@@ -3,7 +3,7 @@ package io.github.n3roo.world;
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.graphics.Graphics;
 import io.github.n3roo.math.Force;
-import io.github.n3roo.math.RigidBody;
+import io.github.n3roo.world.components.RigidBody;
 import io.github.n3roo.math.Vec2f;
 
 import java.util.Stack;

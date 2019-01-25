@@ -3,7 +3,6 @@ package io.github.n3roo.engine;
 import io.github.n3roo.graphics.Renderer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.Game;
 
 public class NeroEngine {
 
@@ -15,9 +14,5 @@ public class NeroEngine {
 
         LOGGER.info("Starting gameloop");
         GameLoop.start();
-
-        // User class
-        LOGGER.info("Starting game");
-        Game.start();
     }
 }

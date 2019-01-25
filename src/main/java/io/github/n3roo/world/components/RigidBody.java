@@ -1,4 +1,6 @@
-package io.github.n3roo.math;
+package io.github.n3roo.world.components;
+
+import io.github.n3roo.math.Vec2f;
 
 public class RigidBody {
 
@@ -12,7 +14,7 @@ public class RigidBody {
      * @param width width of the collision box
      * @param height width of the collision box
      */
-    public RigidBody(float x, float y, float width, float height){
+    public RigidBody(float x, float y, float width, float height, float mass){
         this.position = new Vec2f(x, y);
         this.dimensions = new Vec2f(width, height);
     }

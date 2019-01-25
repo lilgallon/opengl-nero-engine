@@ -28,7 +28,6 @@ public class Graphics {
         GL2 gl = EventListener.gl;
 
         // Rotate the openGL context
-        // noinspection Duplicates
         gl.glTranslatef(x, y, 0);
         gl.glRotatef(- rotation, 0, 0, 1);
 
