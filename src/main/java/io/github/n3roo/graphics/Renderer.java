@@ -19,7 +19,8 @@ public class Renderer {
     private static GLWindow window = null;
 
     // Tells how many units will fit in the width of the window : can be used to zoom in (--) or out (++)
-    public static float UNITS_WIDE = 10;
+    public static float unitsWide = 10;
+    public static float unitsTall = 0;
 
     public static float cameraX = 0;
     public static float cameraY = 0;

@@ -18,11 +18,11 @@ public class MouseInput implements MouseListener {
     }
 
     public static float getWorldX(){
-        return (Renderer.UNITS_WIDE / Renderer.getWindowWidth() * x - Renderer.UNITS_WIDE / 2) + Renderer.cameraX;
+        return (Renderer.unitsWide / Renderer.getWindowWidth() * x - Renderer.unitsWide / 2) + Renderer.cameraX;
     }
 
     public static float getWorldY(){
-        float unitsTall = Renderer.UNITS_WIDE * ((float) Renderer.getWindowHeight() / (float) Renderer.getWindowWidth());
+        float unitsTall = Renderer.unitsWide * ((float) Renderer.getWindowHeight() / (float) Renderer.getWindowWidth());
         return - (unitsTall / Renderer.getWindowHeight() * y - unitsTall / 2) + Renderer.cameraY;
     }
     

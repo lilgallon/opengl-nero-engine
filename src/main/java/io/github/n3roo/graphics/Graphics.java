@@ -72,6 +72,18 @@ public class Graphics {
         // Get the texture
         Texture texture = image.getTexture();
 
+        // if our image is too far on the right OR
+        // if our image is too far on the left OR
+        // if our image is too far on the top OR
+        // if our image is too far on the bottom,
+        // we won't render
+        if(x - width / 2 - Renderer.cameraX > Renderer.unitsWide / 2 ||
+                x + width / 2 - Renderer.cameraX < - Renderer.unitsWide / 2 ||
+                y - height / 2 - Renderer.cameraY > Renderer.unitsTall / 2 ||
+                y + height / 2 - Renderer.cameraY < - Renderer.unitsTall / 2){
+            return;
+        }
+
         // Bind the texture
         if(texture != null){
             gl.glBindTexture(GL2.GL_TEXTURE_2D, texture.getTextureObject());
