@@ -4,16 +4,19 @@ import io.github.n3roo.math.Force;
 import io.github.n3roo.math.Vec2f;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class World {
+
+    private static ConcurrentLinkedQueue<Tile> tiles = new ConcurrentLinkedQueue<Tile>();
 
     /**
      * A container with all the game objects linked to their ids to access them easily.
      */
-    private static Map<Long, GameObject> gameObjects = new HashMap<Long, GameObject>();
+    private static Map<Long, GameObject> gameObjects = new ConcurrentHashMap<Long, GameObject>();
 
     private static long availableId = 0;
 
@@ -66,6 +69,11 @@ public class World {
 
     public static void render(){
 
+        // Render all the tiles
+        for(Tile tile : tiles){
+            tile.render();
+        }
+
         // Go through all the entities and render them
         for(Map.Entry<Long, GameObject> gameObject : gameObjects.entrySet()){
             gameObject.getValue().render();
@@ -85,6 +93,9 @@ public class World {
 
         // Now we know that we need to handle collisions
         // todo
+        else{
+            go.move(vec);
+        }
     }
 
     /**
@@ -101,6 +112,14 @@ public class World {
         gameObjects.put(availableId, gameObject);
         availableId ++;
         return availableId - 1;
+    }
+
+    /**
+     * It adds a tile to the world.
+     * @param tile the tile to add.
+     */
+    public static void addTile(Tile tile){
+        tiles.offer(tile);
     }
 
     /**

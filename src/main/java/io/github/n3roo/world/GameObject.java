@@ -13,7 +13,7 @@ public abstract class GameObject {
     // The position of the entity
     protected Vec2f position = new Vec2f(0, 0);
 
-    // The site of the entity
+    // The size of the entity
     protected float width = 1;
     protected float height = 1;
 
@@ -40,10 +40,12 @@ public abstract class GameObject {
         Graphics.drawImage(animations[currentAnimation].getImage(), position.x, position.y, width, height);
         Graphics.setRotation(0);
 
-        Graphics.setColor(1, 0, 0, 1);
-        Graphics.fillStrokeRect(getRigidBody().getX(), getRigidBody().getY(),
-                getRigidBody().getWidth(), getRigidBody().getHeight(),
-                0.05f);
+        if(getRigidBody() != null) {
+            Graphics.setColor(1, 0, 0, 1);
+            Graphics.fillStrokeRect(getRigidBody().getX(), getRigidBody().getY(),
+                    getRigidBody().getWidth(), getRigidBody().getHeight(),
+                    0.05f);
+        }
     }
 
     /**
@@ -99,11 +101,28 @@ public abstract class GameObject {
         move(new Vec2f(dx, dy));
     }
 
+    public void setPosition(float x, float y){
+        this.position.x = x;
+        this.position.y = y;
+    }
+
+    public Vec2f getPosition(){
+        return this.position;
+    }
+
     /**
      * The rigid body is a square. It is used to handle collision between objects.
      * @return the rigid body of this game object, or null, if this object does not have any rigid body.
      */
     public RigidBody getRigidBody(){
         return null;
+    }
+
+    public float getWidth(){
+        return this.width;
+    }
+
+    public float getHeight(){
+        return this.height;
     }
 }

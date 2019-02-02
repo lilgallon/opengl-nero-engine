@@ -1,8 +1,9 @@
-package org.example;
+package org.example.world.entities;
 
 import com.jogamp.newt.event.KeyEvent;
 import io.github.n3roo.engine.GameLoop;
 import io.github.n3roo.graphics.Animation;
+import io.github.n3roo.graphics.Renderer;
 import io.github.n3roo.input.KeyInput;
 import io.github.n3roo.input.MouseInput;
 import io.github.n3roo.math.Force;
@@ -15,12 +16,12 @@ import java.util.ArrayList;
 public class Player extends GameObject {
 
     public Player(){
-        ArrayList<String> sprites = new ArrayList<String>();
-        sprites.add("testsprite_1.png");
-        sprites.add("testsprite_2.png");
+        ArrayList<String> frames = new ArrayList<String>();
+        frames.add("testsprite_1.png");
+        frames.add("testsprite_2.png");
 
         animations = new Animation[1];
-        animations[0] = new Animation(sprites, 8);
+        animations[0] = new Animation(frames, 8);
     }
 
     @Override
@@ -47,10 +48,13 @@ public class Player extends GameObject {
         addForce(new Vec2f(xInput * GameLoop.updateDelta(), yInput * GameLoop.updateDelta()), Force.Mode.Velocity);
 
         rotation = (float) Math.toDegrees(Math.atan2(MouseInput.getWorldX() - position.x, MouseInput.getWorldY() - position.y));
+
+        Renderer.cameraX = this.position.x;
+        Renderer.cameraY = this.position.y;
     }
 
     public RigidBody getRigidBody() {
-        return new RigidBody(position.x, position.y, 1f, 0.5f);
+        return new RigidBody(position.x, position.y, 1f, 0.5f, 0);
     }
 
 }
