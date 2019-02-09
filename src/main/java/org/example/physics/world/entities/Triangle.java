@@ -9,7 +9,9 @@ import io.github.n3roo.world.components.RigidBody;
 public class Triangle extends GameObject {
 
     public Triangle(){
-        rigidBody = new RigidBody(new Polygon(new Vec2f(0.5f, 0.5f), 0.3f, 3, 0), 0);
+        position = new Vec2f(0.5f, 0);
+        rigidBody = new RigidBody(new Polygon(0.3f, 3, 0), 0);
+        drawRigidBody = true;
     }
 
     @Override

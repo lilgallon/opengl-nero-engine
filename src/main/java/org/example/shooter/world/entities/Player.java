@@ -21,7 +21,6 @@ public class Player extends GameObject {
 
     public Player(){
         // Collision box
-        Vec2f pos = new Vec2f(0, 0);
 
         ArrayList<Vec2f> points = new ArrayList<Vec2f>();
         points.add(new Vec2f(-0.1f, -0.1f));
@@ -29,7 +28,7 @@ public class Player extends GameObject {
         points.add(new Vec2f(+0.1f, +0.1f));
         points.add(new Vec2f(+0.1f, -0.1f));
 
-        rigidBody = new RigidBody(new Polygon(pos, points), 0);
+        rigidBody = new RigidBody(new Polygon(points), 0);
 
         // Animation
         animations = new Animation[2];
@@ -88,8 +87,6 @@ public class Player extends GameObject {
 
         Renderer.cameraX = this.position.x;
         Renderer.cameraY = this.position.y;
-
-        rigidBody.getPolygon().pos = new Vec2f(this.position.x, this.position.y);
     }
 
 }

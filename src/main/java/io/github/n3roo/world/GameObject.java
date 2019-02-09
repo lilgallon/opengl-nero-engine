@@ -29,6 +29,7 @@ public abstract class GameObject {
 
     // Rigid body (used for collision)
     protected RigidBody rigidBody = null;
+    protected boolean drawRigidBody = false;
 
     // Force handling
     protected Stack<Force> forces = new Stack<Force>();
@@ -48,10 +49,10 @@ public abstract class GameObject {
             Graphics.setRotation(0);
         }
 
-        if(getRigidBody() != null) {
+        if(getRigidBody() != null && drawRigidBody) {
             Graphics.setColor(1, 0, 0, 1);
 
-            Graphics.setTranslation(getRigidBody().getPolygon().pos.x, getRigidBody().getPolygon().pos.y);
+            Graphics.setTranslation(this.position.x, this.position.y);
             int size = getRigidBody().getPolygon().points.size();
             for(int i = 0; i < size; i ++){
                 Graphics.fillLine(getRigidBody().getPolygon().points.get(i).x,
