@@ -1,7 +1,9 @@
 package org.example;
 
 import io.github.n3roo.world.World;
+import org.example.world.entities.Pentagon;
 import org.example.world.entities.Player;
+import org.example.world.entities.Triangle;
 import org.example.world.tiles.GrassTile;
 
 public class Game {
@@ -20,5 +22,7 @@ public class Game {
         }
 
         long playerId = World.addGameObject(new Player());
+        long triangleId = World.addGameObject(new Triangle());
+        long pentagonId = World.addGameObject(new Pentagon());
     }
 }

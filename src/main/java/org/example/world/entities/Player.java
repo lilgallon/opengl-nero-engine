@@ -7,6 +7,7 @@ import io.github.n3roo.graphics.Renderer;
 import io.github.n3roo.input.KeyInput;
 import io.github.n3roo.input.MouseInput;
 import io.github.n3roo.math.Force;
+import io.github.n3roo.math.Polygon;
 import io.github.n3roo.world.components.RigidBody;
 import io.github.n3roo.math.Vec2f;
 import io.github.n3roo.world.GameObject;
@@ -19,6 +20,21 @@ public class Player extends GameObject {
     private static int MOVE;
 
     public Player(){
+        // Collision box
+        Vec2f pos = new Vec2f(0, 0);
+        float angle = 0f;
+
+        ArrayList<Vec2f> o = new ArrayList<Vec2f>();
+
+        o.add(new Vec2f(-30f, -30f));
+        o.add(new Vec2f(-30f, +30f));
+        o.add(new Vec2f(+30f, +30f));
+        o.add(new Vec2f(+30f, -30f));
+        ArrayList<Vec2f> p = new ArrayList<Vec2f>(o);
+
+        rigidBody = new RigidBody(new Polygon(p, pos, angle, o), 0);
+
+        // Animation
         animations = new Animation[2];
 
         // Idle animation
@@ -74,10 +90,6 @@ public class Player extends GameObject {
 
         Renderer.cameraX = this.position.x;
         Renderer.cameraY = this.position.y;
-    }
-
-    public RigidBody getRigidBody() {
-        return new RigidBody(position.x, position.y, 1f, 0.5f, 0);
     }
 
 }

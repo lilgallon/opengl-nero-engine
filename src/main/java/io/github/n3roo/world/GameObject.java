@@ -5,6 +5,7 @@ import io.github.n3roo.graphics.Graphics;
 import io.github.n3roo.math.Force;
 import io.github.n3roo.world.components.RigidBody;
 import io.github.n3roo.math.Vec2f;
+import org.example.world.tiles.GrassTile;
 
 import java.util.Stack;
 
@@ -27,6 +28,9 @@ public abstract class GameObject {
     protected Animation[] animations;
     protected int currentAnimation = 0;
 
+    // Rigid body (used for collision)
+    protected RigidBody rigidBody = null;
+
     // Force handling
     protected Stack<Force> forces = new Stack<Force>();
     protected Vec2f movement = new Vec2f(0, 0);
@@ -36,19 +40,21 @@ public abstract class GameObject {
     }
 
     public void render(){
-        animations[currentAnimation].play();
+        if(animations != null) {
+            animations[currentAnimation].play();
 
-        Graphics.setRotation(rotation + graphicsRotation);
-        Graphics.setColor(1, 1, 1, 1);
-        Graphics.drawImage(animations[currentAnimation].getImage(), position.x, position.y, width, height);
-        Graphics.setRotation(0);
-
-        if(getRigidBody() != null) {
-            Graphics.setColor(1, 0, 0, 1);
-            Graphics.fillStrokeRect(getRigidBody().getX(), getRigidBody().getY(),
-                    getRigidBody().getWidth(), getRigidBody().getHeight(),
-                    0.05f);
+            Graphics.setRotation(rotation + graphicsRotation);
+            Graphics.setColor(1, 1, 1, 1);
+            Graphics.drawImage(animations[currentAnimation].getImage(), position.x, position.y, width, height);
+            Graphics.setRotation(0);
         }
+
+//        if(getRigidBody() != null) {
+//            Graphics.setColor(1, 0, 0, 1);
+//            Graphics.fillStrokeRect(getRigidBody().getX(), getRigidBody().getY(),
+//                    getRigidBody().getWidth(), getRigidBody().getHeight(),
+//                    0.05f);
+//        }
     }
 
     /**
@@ -118,7 +124,7 @@ public abstract class GameObject {
      * @return the rigid body of this game object, or null, if this object does not have any rigid body.
      */
     public RigidBody getRigidBody(){
-        return null;
+        return rigidBody;
     }
 
     public float getWidth(){
