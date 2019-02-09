@@ -92,13 +92,25 @@ public class World {
         if(go1.getRigidBody() == null){
             go1.move(vec);
         }else{ // Now we know that we need to handle collisions
+
+            // TODO: There is still an optimization where we only check the collision with objects that weren't compared:
+            //  m stands for the number of objects that can collide
+            //  for 0..m
+            //      for n+1..m
+            //          check collision
+            //  At the moment we do this this way :
+            //  for i:0..m
+            //      for j:0..m (without i=j)
+            //          check collision
+
             for(Map.Entry<Long, GameObject> gameObjectEntry : gameObjects.entrySet()){
                 GameObject go2 = gameObjectEntry.getValue();
                 if(go1 == go2) continue;
 
-                boolean overlap = polygonOverlapSat(go1, go2);
-                if(overlap){
-                    System.out.println("overlap");
+                Vec2f overlapVec = polygonOverlapSat(go1, go2);
+
+                if(overlapVec != null){
+                    go1.position.add(overlapVec);
                 }
             }
             go1.move(vec);
@@ -107,9 +119,9 @@ public class World {
 
     /**
      * Collision detection using Separated Axis Theorem (SAT).
-     * @return true if the game objects are overlapping.
+     * @return a vector containing the values of overlapping (null means no overlapping)
      */
-    private static boolean polygonOverlapSat(GameObject go1, GameObject go2) {
+    private static Vec2f polygonOverlapSat(GameObject go1, GameObject go2) {
 
         // 2D Rotation and 2D translation
         Polygon poly1 = new Polygon(go1.getRigidBody().getPolygon().getWorldPoints(go1.getPosition(), go1.getRotation()));
@@ -117,6 +129,8 @@ public class World {
 
         Polygon p1 = poly1;
         Polygon p2 = poly2;
+
+        float overlap = Float.MAX_VALUE;
 
         for(int poly = 0; poly < 2; poly ++){
             if(poly == 1){
@@ -152,12 +166,20 @@ public class World {
                     max_p2 = Math.max(max_p2, q);
                 }
 
+                // Calculate actual overlap along projected axis, and store the minimum
+                overlap = Math.min(Math.min(max_p1, max_p2) - Math.max(min_p1, min_p2), overlap);
+
                 if(!(max_p2 >= min_p1 && max_p1 >= min_p2))
-                    return false;
+                    return null;
             }
         }
 
-        return true;
+        // If we got here, the objects have collided, we will displace p1 by overlap along the vector between the two
+        // objects centers.
+        Vec2f d = new Vec2f(go2.getPosition().x - go1.getPosition().x, go2.getPosition().y - go1.getPosition().y);
+        float s = (float) Math.sqrt(d.x * d.x + d.y * d.y);
+
+        return new Vec2f(- overlap * d.x / s, - overlap * d.y / s);
     }
 
     /**

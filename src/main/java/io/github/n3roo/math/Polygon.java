@@ -46,8 +46,10 @@ public class Polygon {
         ArrayList<Vec2f> worldPoints = new ArrayList<Vec2f>(points);
 
         for(int i = 0; i < worldPoints.size(); i ++){
-            float teta = - rotation * (float) Math.PI / 180f;
             // Rotation
+            float teta = - rotation * (float) Math.PI / 180f;
+            // x' = x cos(teta) - y sin(teta)
+            // y' = x sin(teta) + y cos(teta)
             float x = (worldPoints.get(i).x * (float) Math.cos(teta)) - (worldPoints.get(i).y * (float) Math.sin(teta));
             float y = (worldPoints.get(i).x * (float) Math.sin(teta)) + (worldPoints.get(i).y * (float) Math.cos(teta));
             // Translation
