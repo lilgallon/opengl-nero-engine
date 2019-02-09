@@ -1,4 +1,4 @@
-package org.example.world.entities;
+package org.example.shooter.world.entities;
 
 import com.jogamp.newt.event.KeyEvent;
 import io.github.n3roo.engine.GameLoop;
@@ -22,7 +22,6 @@ public class Player extends GameObject {
     public Player(){
         // Collision box
         Vec2f pos = new Vec2f(0, 0);
-        float angle = 0f;
 
         ArrayList<Vec2f> points = new ArrayList<Vec2f>();
         points.add(new Vec2f(-0.1f, -0.1f));
@@ -30,7 +29,7 @@ public class Player extends GameObject {
         points.add(new Vec2f(+0.1f, +0.1f));
         points.add(new Vec2f(+0.1f, -0.1f));
 
-        rigidBody = new RigidBody(new Polygon(pos, points, angle), 0);
+        rigidBody = new RigidBody(new Polygon(pos, points), 0);
 
         // Animation
         animations = new Animation[2];

@@ -51,7 +51,6 @@ public abstract class GameObject {
         if(getRigidBody() != null) {
             Graphics.setColor(1, 0, 0, 1);
 
-            Graphics.setRotation(getRigidBody().getPolygon().angle);
             Graphics.setTranslation(getRigidBody().getPolygon().pos.x, getRigidBody().getPolygon().pos.y);
             int size = getRigidBody().getPolygon().points.size();
             for(int i = 0; i < size; i ++){
@@ -61,7 +60,6 @@ public abstract class GameObject {
                         getRigidBody().getPolygon().points.get((i + 1) % size).y);
             }
             Graphics.setTranslation(0, 0);
-            Graphics.setRotation(0);
         }
     }
 

@@ -1,4 +1,4 @@
-package org.example.world.tiles;
+package org.example.shooter.world.tiles;
 
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.world.Tile;
