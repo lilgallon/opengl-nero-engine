@@ -14,13 +14,12 @@ public class Pentagon extends GameObject {
         float angle = 0f;
         float fTheta = (float) Math.PI * 2f / 5f;
 
-        ArrayList<Vec2f> o = new ArrayList<Vec2f>();
+        ArrayList<Vec2f> points = new ArrayList<Vec2f>();
         for(int i = 0; i < 5; i ++){
-            o.add(new Vec2f((float) (30f * Math.cos(fTheta * i)), (float)(30f * Math.sin(fTheta * i))));
+            points.add(new Vec2f((float) (0.3f * Math.cos(fTheta * i)), (float)(0.3f * Math.sin(fTheta * i))));
         }
-        ArrayList<Vec2f> p = new ArrayList<Vec2f>(o);
 
-        rigidBody = new RigidBody(new Polygon(p, pos, angle, o), 0);
+        rigidBody = new RigidBody(new Polygon(pos, points, angle), 0);
     }
 
     @Override

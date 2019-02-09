@@ -24,15 +24,13 @@ public class Player extends GameObject {
         Vec2f pos = new Vec2f(0, 0);
         float angle = 0f;
 
-        ArrayList<Vec2f> o = new ArrayList<Vec2f>();
+        ArrayList<Vec2f> points = new ArrayList<Vec2f>();
+        points.add(new Vec2f(-0.1f, -0.1f));
+        points.add(new Vec2f(-0.1f, +0.1f));
+        points.add(new Vec2f(+0.1f, +0.1f));
+        points.add(new Vec2f(+0.1f, -0.1f));
 
-        o.add(new Vec2f(-30f, -30f));
-        o.add(new Vec2f(-30f, +30f));
-        o.add(new Vec2f(+30f, +30f));
-        o.add(new Vec2f(+30f, -30f));
-        ArrayList<Vec2f> p = new ArrayList<Vec2f>(o);
-
-        rigidBody = new RigidBody(new Polygon(p, pos, angle, o), 0);
+        rigidBody = new RigidBody(new Polygon(pos, points, angle), 0);
 
         // Animation
         animations = new Animation[2];
@@ -84,12 +82,15 @@ public class Player extends GameObject {
             currentAnimation = IDLE;
         }
 
+
         addForce(new Vec2f(xInput * GameLoop.updateDelta(), yInput * GameLoop.updateDelta()), Force.Mode.Velocity);
 
         rotation = (float) Math.toDegrees(Math.atan2(MouseInput.getWorldX() - position.x, MouseInput.getWorldY() - position.y));
 
         Renderer.cameraX = this.position.x;
         Renderer.cameraY = this.position.y;
+
+        rigidBody.getPolygon().pos = new Vec2f(this.position.x, this.position.y);
     }
 
 }

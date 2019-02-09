@@ -13,16 +13,17 @@ public class Game {
      */
     public static void start(){
 
-        for(int x = 0; x < 10; x++) {
-            for(int y = 0; y < 10; y++) {
-                GrassTile tile = new GrassTile();
-                tile.setPosition(tile.getWidth() * x, tile.getHeight() * y);
-                World.addTile(tile);
-            }
-        }
+//        for(int x = 0; x < 10; x++) {
+//            for(int y = 0; y < 10; y++) {
+//                GrassTile tile = new GrassTile();
+//                tile.setPosition(tile.getWidth() * x, tile.getHeight() * y);
+//                World.addTile(tile);
+//            }
+//        }
 
         long playerId = World.addGameObject(new Player());
+
         long triangleId = World.addGameObject(new Triangle());
-        long pentagonId = World.addGameObject(new Pentagon());
+//        long pentagonId = World.addGameObject(new Pentagon());
     }
 }

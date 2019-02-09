@@ -5,7 +5,6 @@ import io.github.n3roo.graphics.Graphics;
 import io.github.n3roo.math.Force;
 import io.github.n3roo.world.components.RigidBody;
 import io.github.n3roo.math.Vec2f;
-import org.example.world.tiles.GrassTile;
 
 import java.util.Stack;
 
@@ -49,12 +48,21 @@ public abstract class GameObject {
             Graphics.setRotation(0);
         }
 
-//        if(getRigidBody() != null) {
-//            Graphics.setColor(1, 0, 0, 1);
-//            Graphics.fillStrokeRect(getRigidBody().getX(), getRigidBody().getY(),
-//                    getRigidBody().getWidth(), getRigidBody().getHeight(),
-//                    0.05f);
-//        }
+        if(getRigidBody() != null) {
+            Graphics.setColor(1, 0, 0, 1);
+
+            Graphics.setRotation(getRigidBody().getPolygon().angle);
+            Graphics.setTranslation(getRigidBody().getPolygon().pos.x, getRigidBody().getPolygon().pos.y);
+            int size = getRigidBody().getPolygon().points.size();
+            for(int i = 0; i < size; i ++){
+                Graphics.fillLine(getRigidBody().getPolygon().points.get(i).x,
+                        getRigidBody().getPolygon().points.get(i).y,
+                        getRigidBody().getPolygon().points.get((i + 1) % size).x,
+                        getRigidBody().getPolygon().points.get((i + 1) % size).y);
+            }
+            Graphics.setTranslation(0, 0);
+            Graphics.setRotation(0);
+        }
     }
 
     /**

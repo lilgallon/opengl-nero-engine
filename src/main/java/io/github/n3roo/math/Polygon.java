@@ -4,20 +4,17 @@ import java.util.ArrayList;
 
 public class Polygon {
 
-    // Transformed points (world space)
-    public ArrayList<Vec2f> p;
     // Position of shape
     public Vec2f pos;
     // Direction of shape
-    float angle;
+    public float angle;
     // Model of shape (relative to pos)
-    ArrayList<Vec2f> o;
+    public ArrayList<Vec2f> points;
 
-    public Polygon(ArrayList<Vec2f> p, Vec2f pos, float angle, ArrayList<Vec2f> o){
-        this.p = p;
+    public Polygon(Vec2f pos, ArrayList<Vec2f> points, float angle){
+        this.points = points;
         this.pos = pos;
         this.angle = angle;
-        this.o = o;
     }
 
 }

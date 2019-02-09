@@ -15,6 +15,9 @@ public class Graphics {
     // Rotation in degrees (clockwise)
     private static float rotation = 0;
 
+    private static float xTranslation;
+    private static float yTranslation;
+
     /**
      * It draws a rectangle (width ; height).
      * The position is the center of the rectangle.
@@ -28,6 +31,7 @@ public class Graphics {
         GL2 gl = EventListener.gl;
 
         // Rotate the openGL context
+        gl.glTranslatef(xTranslation, yTranslation, 0);
         gl.glTranslatef(x, y, 0);
         gl.glRotatef(- rotation, 0, 0, 1);
 
@@ -44,6 +48,7 @@ public class Graphics {
         // Restore the openGL context
         gl.glRotatef(rotation, 0, 0, 1);
         gl.glTranslatef(- x, - y, 0);
+        gl.glTranslatef(-xTranslation, -yTranslation, 0);
     }
 
     public static void fillStrokeRect(float x, float y, float width, float height, float thickness){
@@ -55,6 +60,34 @@ public class Graphics {
         fillRect(x, y, - thickness, - height);
         // right
         fillRect(x + width, y, thickness, - height);
+    }
+
+    /**
+     * It draws a line.
+     * @param x1 horizontal position of first point
+     * @param y1 vertical position of first point
+     * @param x2 horizontal position of second point
+     * @param y2 vertical position of second point
+     */
+    @SuppressWarnings("Duplicates")
+    public static void fillLine(float x1, float y1, float x2, float y2){
+        GL2 gl = EventListener.gl;
+
+        // Rotate the openGL context
+        gl.glTranslatef(xTranslation, yTranslation, 0);
+        gl.glRotatef(- rotation, 0, 0, 1);
+
+        // Draw the rectangle
+        gl.glColor4f(red, green, blue, alpha);
+        gl.glBegin(GL2.GL_LINES);
+        gl.glVertex2f(x1, y1);
+        gl.glVertex2f(x2, y2);
+        gl.glEnd();
+        gl.glFlush();
+
+        // Restore the openGL context
+        gl.glRotatef(rotation, 0, 0, 1);
+        gl.glTranslatef(-xTranslation, -yTranslation, 0);
     }
 
     /**
@@ -90,6 +123,7 @@ public class Graphics {
         }
 
         // Rotate the openGL context
+        gl.glTranslatef(xTranslation, yTranslation, 0);
         gl.glTranslatef(x, y, 0);
         gl.glRotatef(- rotation, 0, 0, 1);
 
@@ -115,6 +149,7 @@ public class Graphics {
         // Restore the openGL context
         gl.glRotatef(rotation, 0, 0, 1);
         gl.glTranslatef(- x, - y, 0);
+        gl.glTranslatef(-xTranslation, -yTranslation, 0);
     }
 
     /**
@@ -138,6 +173,11 @@ public class Graphics {
      */
     public static void setRotation(float r){
         rotation = r;
+    }
+
+    public static void setTranslation(float tx, float ty){
+        xTranslation = tx;
+        yTranslation = ty;
     }
 
 }
