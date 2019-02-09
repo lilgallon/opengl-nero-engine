@@ -20,6 +20,9 @@ public abstract class GameObject {
     // The rotation (in degrees)
     protected float rotation = 0;
 
+    // Rotation offset of the renderer
+    protected float graphicsRotation = 0;
+
     // Animations
     protected Animation[] animations;
     protected int currentAnimation = 0;
@@ -35,7 +38,7 @@ public abstract class GameObject {
     public void render(){
         animations[currentAnimation].play();
 
-        Graphics.setRotation(rotation);
+        Graphics.setRotation(rotation + graphicsRotation);
         Graphics.setColor(1, 1, 1, 1);
         Graphics.drawImage(animations[currentAnimation].getImage(), position.x, position.y, width, height);
         Graphics.setRotation(0);

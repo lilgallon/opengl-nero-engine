@@ -15,13 +15,30 @@ import java.util.ArrayList;
 
 public class Player extends GameObject {
 
-    public Player(){
-        ArrayList<String> frames = new ArrayList<String>();
-        frames.add("testsprite_1.png");
-        frames.add("testsprite_2.png");
+    private static int IDLE;
+    private static int MOVE;
 
-        animations = new Animation[1];
-        animations[0] = new Animation(frames, 8);
+    public Player(){
+        animations = new Animation[2];
+
+        // Idle animation
+        IDLE = 0;
+        ArrayList<String> idleFrames = new ArrayList<String>();
+        for(int i = 0; i < 20; i ++){
+            idleFrames.add("rifle/idle/survivor-idle_rifle_" + i + ".png");
+        }
+        animations[IDLE] = new Animation(idleFrames, 15);
+
+        // Move animation
+        MOVE = 1;
+        ArrayList<String> moveFrames = new ArrayList<String>();
+        for(int i = 0; i < 20; i ++){
+            moveFrames.add("rifle/move/survivor-move_rifle_" + i + ".png");
+        }
+        animations[MOVE] = new Animation(moveFrames, 50);
+
+        // Fix sprite rotation so it points the cursor
+        graphicsRotation = -90;
     }
 
     @Override
@@ -43,6 +60,12 @@ public class Player extends GameObject {
 
         if(KeyInput.getKey(KeyEvent.VK_S)){
             yInput --;
+        }
+
+        if(xInput != 0 || yInput != 0){
+            currentAnimation = MOVE;
+        }else{
+            currentAnimation = IDLE;
         }
 
         addForce(new Vec2f(xInput * GameLoop.updateDelta(), yInput * GameLoop.updateDelta()), Force.Mode.Velocity);
