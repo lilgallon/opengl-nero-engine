@@ -3,6 +3,7 @@ package io.github.n3roo.world;
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.graphics.Graphics;
 import io.github.n3roo.math.Force;
+import io.github.n3roo.math.Polygon;
 import io.github.n3roo.world.components.RigidBody;
 import io.github.n3roo.math.Vec2f;
 
@@ -50,8 +51,8 @@ public abstract class GameObject {
         }
 
         if(getRigidBody() != null && drawRigidBody) {
-            Graphics.setColor(1, 0, 0, 1);
-
+            Graphics.setColor(1, 0, 0, 1f);
+            Graphics.setRotation(rotation);
             Graphics.setTranslation(this.position.x, this.position.y);
             int size = getRigidBody().getPolygon().points.size();
             for(int i = 0; i < size; i ++){
@@ -60,6 +61,7 @@ public abstract class GameObject {
                         getRigidBody().getPolygon().points.get((i + 1) % size).x,
                         getRigidBody().getPolygon().points.get((i + 1) % size).y);
             }
+            Graphics.setRotation(0);
             Graphics.setTranslation(0, 0);
         }
     }
@@ -140,5 +142,9 @@ public abstract class GameObject {
 
     public float getHeight(){
         return this.height;
+    }
+
+    public float getRotation(){
+        return this.rotation;
     }
 }

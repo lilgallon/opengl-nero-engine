@@ -54,6 +54,7 @@ public class Player extends GameObject {
     }
 
     @Override
+    @SuppressWarnings("Duplicates")
     public void update(){
         float xInput= 0;
         float yInput = 0;

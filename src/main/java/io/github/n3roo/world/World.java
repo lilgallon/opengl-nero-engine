@@ -1,6 +1,8 @@
 package io.github.n3roo.world;
 
+import io.github.n3roo.graphics.Graphics;
 import io.github.n3roo.math.Force;
+import io.github.n3roo.math.Polygon;
 import io.github.n3roo.math.Vec2f;
 
 import java.util.ArrayList;
@@ -82,20 +84,80 @@ public class World {
 
     /**
      * It moves an object by taking in account collisions.
-     * @param go game object,
+     * @param go1 game object,
      * @param vec movement vector.
      */
-    private static void moveGameObject(GameObject go, Vec2f vec){
+    private static void moveGameObject(GameObject go1, Vec2f vec){
         // We need to check if the game object as a rigid body, if it doesn't, we don't need to handle collision
-        if(go.getRigidBody() == null){
-            go.move(vec);
+        if(go1.getRigidBody() == null){
+            go1.move(vec);
+        }else{ // Now we know that we need to handle collisions
+            for(Map.Entry<Long, GameObject> gameObjectEntry : gameObjects.entrySet()){
+                GameObject go2 = gameObjectEntry.getValue();
+                if(go1 == go2) continue;
+
+                boolean overlap = polygonOverlapSat(go1, go2);
+                if(overlap){
+                    System.out.println("overlap");
+                }
+            }
+            go1.move(vec);
+        }
+    }
+
+    /**
+     * Collision detection using Separated Axis Theorem (SAT).
+     * @return true if the game objects are overlapping.
+     */
+    private static boolean polygonOverlapSat(GameObject go1, GameObject go2) {
+
+        // 2D Rotation and 2D translation
+        Polygon poly1 = new Polygon(go1.getRigidBody().getPolygon().getWorldPoints(go1.getPosition(), go1.getRotation()));
+        Polygon poly2 = new Polygon(go2.getRigidBody().getPolygon().getWorldPoints(go2.getPosition(), go2.getRotation()));
+
+        Polygon p1 = poly1;
+        Polygon p2 = poly2;
+
+        for(int poly = 0; poly < 2; poly ++){
+            if(poly == 1){
+                p1 = new Polygon(poly2);
+                p2 = new Polygon(poly1);
+            }
+
+            // a -> edge 1
+            // b -> edge 2
+            for(int a = 0; a < p1.points.size(); a ++){
+                int b = (a + 1) % p1.points.size();
+                Vec2f axisProj = new Vec2f( -(p1.points.get(b).y - p1.points.get(a).y), p1.points.get(b).x - p1.points.get(a).x);
+                float d = (float) Math.sqrt(axisProj.x * axisProj.x + axisProj.y * axisProj.y);
+                axisProj = new Vec2f( axisProj.x / d, axisProj.y / d);
+
+                // Work out min and max 1D points for p1
+                float min_p1 = Float.MAX_VALUE;
+                float max_p1 = - Float.MAX_VALUE;
+
+                for(int p = 0; p < p1.points.size(); p++){
+                    float q = (p1.points.get(p).x * axisProj.x + p1.points.get(p).y * axisProj.y);
+                    min_p1 = Math.min(min_p1, q);
+                    max_p1 = Math.max(max_p1, q);
+                }
+
+                // Work out min and max 1D points for p2
+                float min_p2 = Float.MAX_VALUE;
+                float max_p2 = - Float.MAX_VALUE;
+
+                for(int p = 0; p < p2.points.size(); p++){
+                    float q = (p2.points.get(p).x * axisProj.x + p2.points.get(p).y * axisProj.y);
+                    min_p2 = Math.min(min_p2, q);
+                    max_p2 = Math.max(max_p2, q);
+                }
+
+                if(!(max_p2 >= min_p1 && max_p1 >= min_p2))
+                    return false;
+            }
         }
 
-        // Now we know that we need to handle collisions
-        // todo
-        else{
-            go.move(vec);
-        }
+        return true;
     }
 
     /**
