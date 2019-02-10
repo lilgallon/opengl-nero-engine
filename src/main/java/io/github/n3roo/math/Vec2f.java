@@ -10,6 +10,11 @@ public class Vec2f {
         this.y = y;
     }
 
+    public Vec2f(Vec2f vec){
+        this.x = vec.x;
+        this.y = vec.y;
+    }
+
     /**
      * It adds the two vectors this way :
      * > vec1.x += vec2.x
@@ -20,6 +25,18 @@ public class Vec2f {
     public void add(Vec2f vec){
         this.x += vec.x;
         this.y += vec.y;
+    }
+
+    /**
+     * It subtracts the two vectors this way :
+     * > vec1.x -= vec2.x
+     * > vec1.y -= vec2.y
+     *
+     * @param vec vector to subtract with.
+     */
+    public void subtract(Vec2f vec){
+        this.x -= vec.x;
+        this.y -= vec.y;
     }
 
     /**

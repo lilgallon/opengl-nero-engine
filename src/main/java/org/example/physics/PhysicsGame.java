@@ -8,11 +8,12 @@ import org.example.physics.world.entities.Triangle;
 public class PhysicsGame {
 
     public static void start(){
-        // Borders
-        long borderTop = World.addGameObject(new Platform());
 
         // Entities
-        long triangleId = World.addGameObject(new Triangle());
-        long pentagonId = World.addGameObject(new Pentagon());
+        World.addGameObject(new Pentagon());
+        World.addGameObject(new Triangle());
+
+        // Borders
+        World.addGameObject(new Platform());
     }
 }

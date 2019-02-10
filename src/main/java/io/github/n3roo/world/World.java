@@ -1,6 +1,5 @@
 package io.github.n3roo.world;
 
-import io.github.n3roo.graphics.Graphics;
 import io.github.n3roo.math.Force;
 import io.github.n3roo.math.Polygon;
 import io.github.n3roo.math.Vec2f;
@@ -8,7 +7,6 @@ import io.github.n3roo.math.Vec2f;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Stack;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class World {
@@ -16,11 +14,9 @@ public class World {
     private static ConcurrentLinkedQueue<Tile> tiles = new ConcurrentLinkedQueue<Tile>();
 
     /**
-     * A container with all the game objects linked to their ids to access them easily.
+     * A container with all the game objects
      */
-    private static Map<Long, GameObject> gameObjects = new ConcurrentHashMap<Long, GameObject>();
-
-    private static long availableId = 0;
+    private static ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
     /**
      * This variable is used to slow down the forces.
@@ -30,8 +26,8 @@ public class World {
     public static void update(){
 
         // Go through all the entities and update them
-        for(Map.Entry<Long, GameObject> gameObjectEntry : gameObjects.entrySet()){
-            GameObject gameObject = gameObjectEntry.getValue();
+        for(int i = 0; i < gameObjects.size(); i++){
+            GameObject gameObject = gameObjects.get(i);
 
             // Force management
             Vec2f movement = gameObject.getMovement();
@@ -58,7 +54,7 @@ public class World {
             }
             // Then, we can move
             constantMovement.add(movement);
-            moveGameObject(gameObject, constantMovement);
+            moveGameObject(i, constantMovement);
             // And set the current movement vector to the force vector containing all the impulse forces
             gameObject.setMovement(movement);
             // We put back all the persistent forces
@@ -77,22 +73,21 @@ public class World {
         }
 
         // Go through all the entities and render them
-        for(Map.Entry<Long, GameObject> gameObject : gameObjects.entrySet()){
-            gameObject.getValue().render();
+        for(int i = 0; i < gameObjects.size(); i ++){
+            gameObjects.get(i).render();
         }
     }
 
     /**
      * It moves an object by taking in account collisions.
-     * @param go1 game object,
+     * @param i game object index,
      * @param vec movement vector.
      */
-    private static void moveGameObject(GameObject go1, Vec2f vec){
+    private static void moveGameObject(int i, Vec2f vec){
         // We need to check if the game object as a rigid body, if it doesn't, we don't need to handle collision
-        if(go1.getRigidBody() == null){
-            go1.move(vec);
+        if(gameObjects.get(i).getRigidBody() == null){
+            gameObjects.get(i).move(vec);
         }else{ // Now we know that we need to handle collisions
-
             // TODO: There is still an optimization where we only check the collision with objects that weren't compared:
             //  m stands for the number of objects that can collide
             //  for 0..m
@@ -103,17 +98,19 @@ public class World {
             //      for j:0..m (without i=j)
             //          check collision
 
-            for(Map.Entry<Long, GameObject> gameObjectEntry : gameObjects.entrySet()){
-                GameObject go2 = gameObjectEntry.getValue();
-                if(go1 == go2) continue;
+            GameObject go1 = gameObjects.get(i);
+            go1.move(vec);
+            for(int j = i + 1; j < gameObjects.size(); j ++){
+                GameObject go2 = gameObjects.get(j);
+
+                if(go1 == go2 || go2.getRigidBody() == null) continue;
 
                 Vec2f overlapVec = polygonOverlapSat(go1, go2);
 
                 if(overlapVec != null){
-                    go1.position.add(overlapVec);
+                    go1.move(overlapVec);
                 }
             }
-            go1.move(vec);
         }
     }
 
@@ -183,19 +180,15 @@ public class World {
     }
 
     /**
-     * It adds a gameObject to the world, and returns its id. Ths id can be used trough getGameObject(long id) to get
-     * the gameObject.
+     * It adds a gameObject to the world.
      * @param gameObject the gameObject to add.
-     * @return gameObject id.
      */
-    public static long addGameObject(GameObject gameObject) {
+    public static void addGameObject(GameObject gameObject) {
         if(gameObject == null){
             throw new IllegalArgumentException("Can't add a null game object to the world.");
         }
 
-        gameObjects.put(availableId, gameObject);
-        availableId ++;
-        return availableId - 1;
+        gameObjects.add(gameObject);
     }
 
     /**
@@ -204,23 +197,5 @@ public class World {
      */
     public static void addTile(Tile tile){
         tiles.offer(tile);
-    }
-
-    /**
-     * It retrieve the game object associated to the given id.
-     * @param id the id of the game object.
-     * @return the game object if it was found.
-     */
-    public static GameObject getGameObject(long id){
-        if(id >= availableId){
-            throw new IllegalArgumentException("The id given is greater or equal to the first available id. The gameobject is unknown.");
-        }else{
-            GameObject gameObject = gameObjects.get(id);
-            if(gameObject == null){
-                throw new IllegalArgumentException("The gameobject of id " + id + " is unknown.");
-            }else{
-                return gameObjects.get(id);
-            }
-        }
     }
 }

@@ -1,5 +1,6 @@
 package org.example.physics.world.entities;
 
+import io.github.n3roo.math.Force;
 import io.github.n3roo.math.Polygon;
 import io.github.n3roo.math.Vec2f;
 import io.github.n3roo.world.GameObject;

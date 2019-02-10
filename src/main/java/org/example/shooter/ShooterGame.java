@@ -20,6 +20,6 @@ public class ShooterGame {
             }
         }
 
-        long playerId = World.addGameObject(new Player());
+        World.addGameObject(new Player());
     }
 }
