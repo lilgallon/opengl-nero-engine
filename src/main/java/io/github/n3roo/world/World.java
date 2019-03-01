@@ -105,7 +105,7 @@ public class World {
 
             for(Map.Entry<Long, GameObject> gameObjectEntry : gameObjects.entrySet()){
                 GameObject go2 = gameObjectEntry.getValue();
-                if(go1 == go2) continue;
+                if(go1 == go2 || go2.getRigidBody() == null) continue;
 
                 Vec2f overlapVec = polygonOverlapSat(go1, go2);
 

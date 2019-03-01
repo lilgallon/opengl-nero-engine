@@ -10,9 +10,9 @@ public class Main {
         NeroEngine.start();
 
         // Shooter game demo
-        // ShooterGame.start();
+        ShooterGame.start();
 
         // Physics demo
-        PhysicsGame.start();
+        // PhysicsGame.start();
     }
 }

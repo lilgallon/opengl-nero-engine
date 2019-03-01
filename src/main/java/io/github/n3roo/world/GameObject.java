@@ -9,7 +9,7 @@ import io.github.n3roo.math.Vec2f;
 
 import java.util.Stack;
 
-public abstract class GameObject {
+public class GameObject {
 
     // The position of the entity
     protected Vec2f position = new Vec2f(0, 0);
@@ -122,6 +122,30 @@ public abstract class GameObject {
     public void setPosition(float x, float y){
         this.position.x = x;
         this.position.y = y;
+    }
+
+    public void setCurrentAnimation(int currentAnimation){
+        this.currentAnimation = currentAnimation;
+    }
+
+    public void setRotation(float rotation){
+        this.rotation = rotation;
+    }
+
+    public void setWidth(float width){
+        this.width = width;
+    }
+
+    public void setHeight(float height){
+        this.height = height;
+    }
+
+    public void setAnimations(Animation[] animations){
+        this.animations = animations;
+    }
+
+    public void setPosition(Vec2f pos){
+        this.position = pos;
     }
 
     public Vec2f getPosition(){
