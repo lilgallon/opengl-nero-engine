@@ -1,23 +1,31 @@
 # Nero engine
 ![header](https://n3roo.github.io/img/nero-engine-rect.png)
 
-![release](https://img.shields.io/github/release/n3roo/nero-engine.svg) ![tag](https://img.shields.io/github/tag/n3roo/nero-engine.svg) ![issues](https://img.shields.io/github/issues/n3roo/nero-engine.svg) ![license](https://img.shields.io/github/license/n3roo/nero-engine.svg) ![Progression](https://img.shields.io/badge/Progression-0%25-red.svg)
+![release](https://img.shields.io/github/release/n3roo/nero-engine.svg) ![tag](https://img.shields.io/github/tag/n3roo/nero-engine.svg) ![issues](https://img.shields.io/github/issues/n3roo/nero-engine.svg) ![license](https://img.shields.io/github/license/n3roo/nero-engine.svg)
 
-A java game engine powered by OpenGL. Credits go to the tutorials of [Sam Parker](https://www.youtube.com/channel/UCW-0slcL8cidzwxwndpP9WQ).
-I started the development thanks to these [youtube videos](https://www.youtube.com/watch?v=etNPl3Dk2XY&list=PL9a_05IxzbrctpcWdVyVaF9AO0vn4WD4J).
+A java 2D game engine powered by OpenGL.
 
-## 1. Todo list
+## 1. Progression
 
-[Here](https://github.com/N3ROO/nero-engine/projects/1) is everything you need.
+I have a [blog](https://n3roo.github.io/projects/nero-engine-blog) on my website where I speak about the last changes. [Here](https://github.com/N3ROO/nero-engine/projects/1) is the todo list.
 
-## 2. Contributing
+## 2. Project description
+
+This is my most ambitious project yet. I plan to implement everything that I have learned in Computer Science these last years. I hope that the first version will be released this summer. To demonstrate the abilities of the engine I also plan to release a 2D game shooter and a physics scene.
+
+**Acknowledgments:**
+- University of Bordeaux,
+- Videos of [Sam Parker](https://www.youtube.com/channel/UCW-0slcL8cidzwxwndpP9WQ),
+- Videos of [Javidx9 - One Lone Coder](https://www.youtube.com/channel/UC-yuWVUplUJZvieEligKBkA).
+
+## 3. Contributing
 
 Just fork the project and make the changes that you find necessary. If you use IntelliJ, you just need to open the folder
 as a project. Then make sure to right click on "src/res" add "Mark Directory as" -> "Resources root".
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-## 3. Contributors
+## 4. Contributors
 - N3ROO - *Main developer* - [Github](https://github.com/N3ROO) - [Website](https://n3roo.github.io/)
 
-## 4. License
+## 5. License
 This project is licensed under the GPL 3.0 License - see the [LICENSE](LICENSE) file for details.
