@@ -152,6 +152,16 @@ public class Graphics {
         gl.glTranslatef(-xTranslation, -yTranslation, 0);
     }
 
+    public static void drawText(String text, int x, int y){
+        EventListener.textRenderer.beginRendering(
+                EventListener.glAutoDrawable.getSurfaceWidth(),
+                EventListener.glAutoDrawable.getSurfaceHeight()
+        );
+        EventListener.textRenderer.setColor(red, green, blue, alpha);
+        EventListener.textRenderer.draw(text, x, y);
+        EventListener.textRenderer.endRendering();
+    }
+
     /**
      * It changes the color.
      * Values need to be in [0; 1].
