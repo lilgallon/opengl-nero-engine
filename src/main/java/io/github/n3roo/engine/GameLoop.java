@@ -15,6 +15,7 @@ public class GameLoop {
 
     private static int targetFps = 60;
     private static int targetTime = 1000000000 / targetFps; // nb of nanoseconds for one loop
+    public static int currentFps = 0;
 
     public static void start(){
         final Thread thread = new Thread(){
@@ -47,6 +48,7 @@ public class GameLoop {
                     fps ++;
                     if(System.nanoTime() >= lastFpsCheck + 1000000000){
                         // print?
+                        currentFps = fps;
                         fps = 0;
                         lastFpsCheck = System.nanoTime();
                     }
