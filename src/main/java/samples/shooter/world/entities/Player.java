@@ -1,4 +1,4 @@
-package org.example.shooter.world.entities;
+package samples.shooter.world.entities;
 
 import com.jogamp.newt.event.KeyEvent;
 import io.github.n3roo.engine.GameLoop;
@@ -24,7 +24,7 @@ public class Player extends GameObject {
 
     public Player(){
         // Collision box
-        ArrayList<Vec2f> points = new ArrayList<Vec2f>();
+        ArrayList<Vec2f> points = new ArrayList<>();
         points.add(new Vec2f(-0.1f, -0.1f));
         points.add(new Vec2f(-0.1f, +0.1f));
         points.add(new Vec2f(+0.1f, +0.1f));
@@ -37,7 +37,7 @@ public class Player extends GameObject {
 
         // Idle animation
         IDLE = 0;
-        ArrayList<String> idleFrames = new ArrayList<String>();
+        ArrayList<String> idleFrames = new ArrayList<>();
         for(int i = 0; i < 20; i ++){
             idleFrames.add("rifle/idle/survivor-idle_rifle_" + i + ".png");
         }
@@ -45,7 +45,7 @@ public class Player extends GameObject {
 
         // Move animation
         MOVE = 1;
-        ArrayList<String> moveFrames = new ArrayList<String>();
+        ArrayList<String> moveFrames = new ArrayList<>();
         for(int i = 0; i < 20; i ++){
             moveFrames.add("rifle/move/survivor-move_rifle_" + i + ".png");
         }
@@ -64,12 +64,12 @@ public class Player extends GameObject {
         Animation[] legsAnimations = new Animation[2];
 
         // Idle Animation
-        ArrayList<String> fIdleFrames = new ArrayList<String>();
+        ArrayList<String> fIdleFrames = new ArrayList<>();
         fIdleFrames.add("feet/idle/survivor-idle_0.png");
         legsAnimations[IDLE] = new Animation(fIdleFrames, 1);
 
         // Run animation
-        ArrayList<String> fMoveFrames = new ArrayList<String>();
+        ArrayList<String> fMoveFrames = new ArrayList<>();
         for(int i = 0; i < 20; i ++){
             fMoveFrames.add("feet/run/survivor-run_" + i + ".png");
         }
@@ -116,8 +116,8 @@ public class Player extends GameObject {
         legs.setRotation(rotation - 90);
         legs.setPosition(this.position.x, this.position.y - 0.05f);
 
-        Renderer.cameraX = this.position.x;
-        Renderer.cameraY = this.position.y;
+        Renderer.camera.x = this.position.x;
+        Renderer.camera.y = this.position.y;
     }
 
 }

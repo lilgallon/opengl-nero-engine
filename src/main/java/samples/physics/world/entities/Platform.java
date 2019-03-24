@@ -1,4 +1,4 @@
-package org.example.physics.world.entities;
+package samples.physics.world.entities;
 
 import io.github.n3roo.graphics.Graphics;
 import io.github.n3roo.math.Polygon;
@@ -13,7 +13,7 @@ public class Platform extends GameObject {
     public Platform(){
         this.position = new Vec2f(0, -3);
 
-        ArrayList<Vec2f> points = new ArrayList<Vec2f>();
+        ArrayList<Vec2f> points = new ArrayList<>();
         points.add(new Vec2f(-4, -0.2f));
         points.add(new Vec2f(4, -0.2f));
         points.add(new Vec2f(4, 0.2f));

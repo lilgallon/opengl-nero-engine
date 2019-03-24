@@ -1,10 +1,10 @@
-package org.example.physics;
+package samples.physics;
 
 import io.github.n3roo.hud.components.FpsCounter;
 import io.github.n3roo.world.World;
-import org.example.physics.world.entities.Pentagon;
-import org.example.physics.world.entities.Platform;
-import org.example.physics.world.entities.Triangle;
+import samples.physics.world.entities.Pentagon;
+import samples.physics.world.entities.Platform;
+import samples.physics.world.entities.Triangle;
 
 public class PhysicsGame {
 

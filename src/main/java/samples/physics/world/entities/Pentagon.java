@@ -1,4 +1,4 @@
-package org.example.physics.world.entities;
+package samples.physics.world.entities;
 
 import io.github.n3roo.math.Polygon;
 import io.github.n3roo.math.Vec2f;

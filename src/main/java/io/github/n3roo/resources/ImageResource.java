@@ -11,16 +11,20 @@ import java.net.URL;
 
 public class ImageResource {
 
-    // The OpenGL texture object
+    /**
+     * The OpenGL texture object
+     */
     private Texture texture = null;
 
-    // The buffered image of this image
+    /**
+     * The buffered image of this image
+     */
     private BufferedImage image = null;
 
     /**
      * It reads the image and retrieve the texture.
      * @param image_name the name of the image from res/images/ folder.
-     *                   For example, if your image is in /images/level/background.png, you should give
+     *                   For samples, if your image is in /images/level/background.png, you should give
      *                   "level/background.png".
      */
     public ImageResource(String image_name){
@@ -52,5 +56,4 @@ public class ImageResource {
 
         return texture;
     }
-
 }

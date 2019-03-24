@@ -1,8 +1,8 @@
-package org.example;
+package samples;
 
 import io.github.n3roo.engine.NeroEngine;
-import org.example.physics.PhysicsGame;
-import org.example.shooter.ShooterGame;
+import samples.physics.PhysicsGame;
+import samples.shooter.ShooterGame;
 
 public class Main {
 
@@ -10,9 +10,9 @@ public class Main {
         NeroEngine.start();
 
         // Shooter game demo
-        ShooterGame.start();
+        // ShooterGame.start();
 
         // Physics demo
-        // PhysicsGame.start();
+        PhysicsGame.start();
     }
 }

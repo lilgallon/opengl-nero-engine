@@ -6,17 +6,29 @@ import java.util.ArrayList;
 
 public class Animation {
 
-    // The frames of the animation
+    /**
+     * The frames of the animation
+     */
     private ImageResource[] frames;
 
-    // The current frame of the animation
+    /**
+     * The current frame index of the animation
+     */
     private int currentFrame;
 
-    // The frames per seconds
+    /**
+     * The frames per seconds (the velocity of the animation).
+     */
     private int fps;
+
+    /**
+     *  Last time in nanoseconds when we played a frame.
+     */
     private long lastFrameTime;
 
-    // Should we loop ?
+    /**
+     * True means that the animation will loop when finished.
+     */
     private boolean loop;
 
     /**
@@ -106,30 +118,46 @@ public class Animation {
         frames = sprites;
     }
 
-    // GETTERS
-
+    /**
+     * @return the current played frame.
+     */
     public ImageResource getImage(){
         return frames[currentFrame];
     }
 
+    /**
+     * @return all the frames.
+     */
     public ImageResource[] getFrames() {
         return frames;
     }
 
+    /**
+     * @return number of FPS of this animation (corresponds to the velocity).
+     */
     public int getFps() {
         return fps;
     }
 
+    /**
+     * @return true of the animation should loop once finished.
+     */
     public boolean isLooping() {
         return loop;
     }
 
-    // SETTERS
-
+    /**
+     * Change the FPS (velocity) of the animation.
+     * @param fps new fps.
+     */
     public void setFps(int fps) {
         this.fps = fps;
     }
 
+    /**
+     * Changes whether or not the animation should loop.
+     * @param loop new loop value.
+     */
     public void setLoop(boolean loop) {
         this.loop = loop;
     }

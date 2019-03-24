@@ -3,7 +3,6 @@ package io.github.n3roo.world;
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.graphics.Graphics;
 import io.github.n3roo.math.Force;
-import io.github.n3roo.math.Polygon;
 import io.github.n3roo.world.components.RigidBody;
 import io.github.n3roo.math.Vec2f;
 
@@ -33,14 +32,21 @@ public class GameObject {
     protected boolean drawRigidBody = false;
 
     // Force handling
-    protected Stack<Force> forces = new Stack<Force>();
-    protected Vec2f movement = new Vec2f(0, 0);
+    private Stack<Force> forces = new Stack<>();
+    private Vec2f movement = new Vec2f(0, 0);
 
+    /**
+     * Update values in this function.
+     */
     public void update(){
 
     }
 
+    /**
+     * Render anything in this function.
+     */
     public void render(){
+        // We play the animation if there is any.
         if(animations != null) {
             animations[currentAnimation].play();
 
@@ -50,6 +56,7 @@ public class GameObject {
             Graphics.setRotation(0);
         }
 
+        // Draw the rigid body if we want to.
         if(getRigidBody() != null && drawRigidBody) {
             Graphics.setColor(1, 0, 0, 1f);
             Graphics.setRotation(rotation);
@@ -83,73 +90,146 @@ public class GameObject {
         addForce(new Force(vector, mode));
     }
 
-    public Stack<Force> getForces(){
-        return forces;
-    }
-
+    /**
+     * It changes the forces applied to this game object.
+     * @param forces new forces.
+     */
     public void setForces(Stack<Force> forces){
         this.forces = forces;
     }
 
-    public void clearForces(){
-        forces = new Stack<Force>();
+    /**
+     * @return the forces applied to this game object.
+     */
+    public Stack<Force> getForces(){
+        return forces;
     }
 
+    /**
+     * It clears the forces applied to this game object.
+     */
+    public void clearForces(){
+        forces = new Stack<>();
+    }
+
+    /**
+     * It removes a persistent force.
+     * @param force the persistent force to remove.
+     */
     public void removePersistentForce(Force force){
         if(force.getMode() == Force.Mode.Persistent){
             forces.remove(force);
         }else{
-            throw new IllegalArgumentException("Asked to remove a persistent force, but the force given is not persistent");
+            throw new IllegalArgumentException(
+                    "Asked to remove a persistent force, but the force given is not persistent"
+            );
         }
     }
 
+    /**
+     * @return movement vector.
+     */
     public Vec2f getMovement() {
         return movement;
     }
 
+    /**
+     * It changes the game object movement vector.
+     * @param movement new movement vector.
+     */
     public void setMovement(Vec2f movement){
         this.movement = movement;
     }
 
+    /**
+     * It moves the game object (you have to be sure to what you are doing,it does not take in account collisions or
+     * anything).
+     * @param delta movement.
+     */
     public void move(Vec2f delta){
         position.add(delta);
     }
 
+    /**
+     * It moves the game object (you have to be sure to what you are doing,it does not take in account collisions or
+     * anything).
+     * @param dx x movement,
+     * @param dy y movement.
+     */
     public void move(float dx, float dy){
         move(new Vec2f(dx, dy));
     }
 
+    /**
+     * It changes the position.
+     * @param pos new position.
+     */
+    public void setPosition(Vec2f pos){
+        this.position = pos;
+    }
+
+    /**
+     * It changes the position.
+     * @param x new x position,
+     * @param y new y position.
+     */
     public void setPosition(float x, float y){
         this.position.x = x;
         this.position.y = y;
     }
 
+    /**
+     * It changes the current animation (example: walking, and running).
+     * @param currentAnimation new animation index.
+     */
     public void setCurrentAnimation(int currentAnimation){
         this.currentAnimation = currentAnimation;
     }
 
+    /**
+     * It changes the rotation of this game object.
+     * @param rotation new rotation in degrees.
+     */
     public void setRotation(float rotation){
         this.rotation = rotation;
     }
 
+    /**
+     * It changes the width of this game object.
+     * @param width new width.
+     */
     public void setWidth(float width){
         this.width = width;
     }
 
+    /**
+     * It changes the height of this game object.
+     * @param height new height.
+     */
     public void setHeight(float height){
         this.height = height;
     }
 
+    /**
+     * It changes the animations of this object.
+     * @param animations new animations.
+     */
     public void setAnimations(Animation[] animations){
         this.animations = animations;
     }
 
-    public void setPosition(Vec2f pos){
-        this.position = pos;
-    }
-
+    /**
+     * @return the current position of this object.
+     */
     public Vec2f getPosition(){
         return this.position;
+    }
+
+    /**
+     * @return the current rotation of this object.
+     */
+    public float getRotation(){
+        return this.rotation;
     }
 
     /**
@@ -160,15 +240,17 @@ public class GameObject {
         return rigidBody;
     }
 
+    /**
+     * @return the current width of this object.
+     */
     public float getWidth(){
         return this.width;
     }
 
+    /**
+     * @return the current height of this object.
+     */
     public float getHeight(){
         return this.height;
-    }
-
-    public float getRotation(){
-        return this.rotation;
     }
 }

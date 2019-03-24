@@ -8,7 +8,10 @@ import java.util.Map;
 
 public class KeyInput implements KeyListener {
 
-    private static Map<Short, Boolean> keys = new HashMap<Short, Boolean>();
+    /**
+     * Variable that stores all the key status according to their code.
+     */
+    private static Map<Short, Boolean> keys = new HashMap<>();
 
     /**
      * Called every time a key is pressed.

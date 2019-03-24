@@ -1,9 +1,8 @@
-package org.example.shooter;
+package samples.shooter;
 
 import io.github.n3roo.world.World;
-import org.example.shooter.world.entities.Player;
-import org.example.physics.world.entities.Triangle;
-import org.example.shooter.world.tiles.GrassTile;
+import samples.shooter.world.entities.Player;
+import samples.shooter.world.tiles.GrassTile;
 
 public class ShooterGame {
 

@@ -13,16 +13,29 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class World {
 
-    private static ConcurrentLinkedQueue<Tile> tiles = new ConcurrentLinkedQueue<Tile>();
+    /**
+     * A container with all tiles.
+     */
+    private static ConcurrentLinkedQueue<Tile> tiles = new ConcurrentLinkedQueue<>();
 
     /**
      * A container with all the game objects linked to their ids to access them easily.
      */
-    private static Map<Long, GameObject> gameObjects = new ConcurrentHashMap<Long, GameObject>();
+    private static Map<Long, GameObject> gameObjects = new ConcurrentHashMap<>();
 
-    private static Map<Long, HudComponent> hudComponents = new ConcurrentHashMap<Long, HudComponent>();
+    /**
+     * A container with all the hud components linked to their ids to access them easily.
+     */
+    private static Map<Long, HudComponent> hudComponents = new ConcurrentHashMap<>();
 
+    /**
+     * It stores the last available id for a game object.
+     */
     private static long availableIdGo = 0;
+
+    /**
+     * It stores the last available id for an hud component.
+     */
     private static long availableIdHud = 0;
 
     /**
@@ -31,7 +44,6 @@ public class World {
     private static float friction = 0.95f;
 
     public static void update(){
-
         // Go through all the entities and update them
         for(Map.Entry<Long, GameObject> gameObjectEntry : gameObjects.entrySet()){
             GameObject gameObject = gameObjectEntry.getValue();
@@ -43,7 +55,7 @@ public class World {
             // Then we will check all the forces
             Vec2f constantMovement = new Vec2f(0, 0);
             Stack<Force> forces = gameObject.getForces();
-            ArrayList<Force> persistentForces = new ArrayList<Force>();
+            ArrayList<Force> persistentForces = new ArrayList<>();
             while(!forces.empty()){
                 Force force = forces.pop();
                 switch (force.getMode()){
@@ -103,18 +115,8 @@ public class World {
         // We need to check if the game object as a rigid body, if it doesn't, we don't need to handle collision
         if(go1.getRigidBody() == null){
             go1.move(vec);
-        }else{ // Now we know that we need to handle collisions
-
-            // TODO: There is still an optimization where we only check the collision with objects that weren't compared:
-            //  m stands for the number of objects that can collide
-            //  for 0..m
-            //      for n+1..m
-            //          check collision
-            //  At the moment we do this this way :
-            //  for i:0..m
-            //      for j:0..m (without i=j)
-            //          check collision
-
+        }else{
+            // Now we know that we need to handle collisions
             for(Map.Entry<Long, GameObject> gameObjectEntry : gameObjects.entrySet()){
                 GameObject go2 = gameObjectEntry.getValue();
                 if(go1 == go2 || go2.getRigidBody() == null) continue;
@@ -133,6 +135,7 @@ public class World {
      * Collision detection using Separated Axis Theorem (SAT).
      * @return a vector containing the values of overlapping (null means no overlapping)
      */
+    @SuppressWarnings("Duplicates")
     private static Vec2f polygonOverlapSat(GameObject go1, GameObject go2) {
 
         // 2D Rotation and 2D translation
@@ -210,6 +213,12 @@ public class World {
         return availableIdGo - 1;
     }
 
+    /**
+     * It adds an hud component to the world, and returns its id. Ths id can be used trough getHudComponent(long id) to
+     * get the hud component.
+     * @param hudComponent hud component to add.
+     * @return hudComponent id.
+     */
     public static long addHudComponent(HudComponent hudComponent){
         if(hudComponent == null){
             throw new IllegalArgumentException("Can't add a null hud component to the world.");
@@ -229,7 +238,7 @@ public class World {
     }
 
     /**
-     * It retrieve the game object associated to the given id.
+     * It retrieves the game object associated to the given id.
      * @param id the id of the game object.
      * @return the game object if it was found.
      */
@@ -242,6 +251,26 @@ public class World {
                 throw new IllegalArgumentException("The gameobject of id " + id + " is unknown.");
             }else{
                 return gameObjects.get(id);
+            }
+        }
+    }
+
+    /**
+     * It retrieves the hud component associated to the given id.
+     * @param id the id of the hud component.
+     * @return the  hud component if it was found.
+     */
+    public static HudComponent getHudComponent(long id){
+        if(id >= availableIdHud){
+            throw new IllegalArgumentException(
+                    "The id given is greater or equal to the first available id. The hud component is unknown."
+            );
+        }else{
+            HudComponent hudComponent = hudComponents.get(id);
+            if(hudComponent == null){
+                throw new IllegalArgumentException("The hud component of id " + id + " is unknown.");
+            }else{
+                return hudComponents.get(id);
             }
         }
     }

@@ -4,8 +4,14 @@ import io.github.n3roo.math.Polygon;
 
 public class RigidBody {
 
+    /**
+     * Shape of this rigid body.
+     */
     private Polygon polygon;
 
+    /**
+     * Mass of this rigid body.
+     */
     private float mass;
 
     /**
@@ -18,10 +24,16 @@ public class RigidBody {
         this.mass = mass;
     }
 
+    /**
+     * @return the shape of this rigid body.
+     */
     public Polygon getPolygon(){
         return this.polygon;
     }
 
+    /**
+     * @return the mass of this rigid body.
+     */
     public float getMass(){
         return this.mass;
     }

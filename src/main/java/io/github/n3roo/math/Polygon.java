@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public class Polygon {
 
-    // Model of shape (relative to pos)
+    /**
+     * Model of shape (relative to pos)
+     */
     public ArrayList<Vec2f> points;
 
     /**
@@ -16,8 +18,12 @@ public class Polygon {
         this.points = points;
     }
 
+    /**
+     * Copy constructor.
+     * @param polygon the polygon to copy.
+     */
     public Polygon(Polygon polygon){
-        this.points = new ArrayList<Vec2f>(polygon.points);
+        this.points = new ArrayList<>(polygon.points);
     }
 
     /**
@@ -29,9 +35,14 @@ public class Polygon {
     public Polygon(float radius, int edges, float angle){
         float fTheta = (float) (Math.PI * 2) / edges + angle;
 
-        this.points = new ArrayList<Vec2f>();
+        this.points = new ArrayList<>();
         for(int i = 0; i < edges; i ++){
-            this.points.add(new Vec2f((float) (radius * Math.cos(fTheta * i)), (float)(radius * Math.sin(fTheta * i))));
+            this.points.add(
+                    new Vec2f(
+                            (float) (radius * Math.cos(fTheta * i)),
+                            (float)(radius * Math.sin(fTheta * i))
+                    )
+            );
         }
     }
 
@@ -43,15 +54,17 @@ public class Polygon {
      * @return the points list (absolute values).
      */
     public ArrayList<Vec2f> getWorldPoints(Vec2f pos, float rotation){
-        ArrayList<Vec2f> worldPoints = new ArrayList<Vec2f>(points);
+        ArrayList<Vec2f> worldPoints = new ArrayList<>(points);
 
         for(int i = 0; i < worldPoints.size(); i ++){
             // Rotation
             float teta = - rotation * (float) Math.PI / 180f;
+
             // x' = x cos(teta) - y sin(teta)
             // y' = x sin(teta) + y cos(teta)
             float x = (worldPoints.get(i).x * (float) Math.cos(teta)) - (worldPoints.get(i).y * (float) Math.sin(teta));
             float y = (worldPoints.get(i).x * (float) Math.sin(teta)) + (worldPoints.get(i).y * (float) Math.cos(teta));
+
             // Translation
             x += pos.x;
             y += pos.y;
@@ -61,5 +74,4 @@ public class Polygon {
 
         return worldPoints;
     }
-
 }

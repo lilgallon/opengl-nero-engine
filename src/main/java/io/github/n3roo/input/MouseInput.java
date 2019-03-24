@@ -1,8 +1,9 @@
 package io.github.n3roo.input;
 
+import io.github.n3roo.graphics.Renderer;
+
 import com.jogamp.newt.event.MouseEvent;
 import com.jogamp.newt.event.MouseListener;
-import io.github.n3roo.graphics.Renderer;
 
 public class MouseInput implements MouseListener {
 
@@ -17,13 +18,21 @@ public class MouseInput implements MouseListener {
         return y;
     }
 
+    /**
+     * From the a position on the screen, it returns a position in the world.
+     * @return x position in the world.
+     */
     public static float getWorldX(){
-        return (Renderer.unitsWide / Renderer.getWindowWidth() * x - Renderer.unitsWide / 2) + Renderer.cameraX;
+        return (Renderer.unitsWide / Renderer.getWindowWidth() * x - Renderer.unitsWide / 2) + Renderer.camera.x;
     }
 
+    /**
+     * From the a position on the screen, it returns a position in the world.
+     * @return y position in the world.
+     */
     public static float getWorldY(){
         float unitsTall = Renderer.unitsWide * ((float) Renderer.getWindowHeight() / (float) Renderer.getWindowWidth());
-        return - (unitsTall / Renderer.getWindowHeight() * y - unitsTall / 2) + Renderer.cameraY;
+        return - (unitsTall / Renderer.getWindowHeight() * y - unitsTall / 2) + Renderer.camera.y;
     }
     
     public void mouseClicked(MouseEvent e) {

@@ -1,4 +1,4 @@
-package org.example.physics.world.entities;
+package samples.physics.world.entities;
 
 import com.jogamp.newt.event.KeyEvent;
 import io.github.n3roo.engine.GameLoop;

@@ -1,4 +1,4 @@
-package org.example.shooter.world.tiles;
+package samples.shooter.world.tiles;
 
 import io.github.n3roo.graphics.Animation;
 import io.github.n3roo.world.Tile;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class GrassTile extends Tile {
 
     public GrassTile(){
-        ArrayList<String> frames = new ArrayList<String>();
+        ArrayList<String> frames = new ArrayList<>();
         frames.add("grass.png");
 
         animations = new Animation[1];

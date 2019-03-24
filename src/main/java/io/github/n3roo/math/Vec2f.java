@@ -5,6 +5,11 @@ public class Vec2f {
     public float x;
     public float y;
 
+    /**
+     * Basic constructor.
+     * @param x float value,
+     * @param y float value.
+     */
     public Vec2f(float x, float y){
         this.x = x;
         this.y = y;
