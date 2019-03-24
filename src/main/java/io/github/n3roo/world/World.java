@@ -1,6 +1,6 @@
 package io.github.n3roo.world;
 
-import io.github.n3roo.graphics.Graphics;
+import io.github.n3roo.hud.HudComponent;
 import io.github.n3roo.math.Force;
 import io.github.n3roo.math.Polygon;
 import io.github.n3roo.math.Vec2f;
@@ -20,7 +20,10 @@ public class World {
      */
     private static Map<Long, GameObject> gameObjects = new ConcurrentHashMap<Long, GameObject>();
 
-    private static long availableId = 0;
+    private static Map<Long, HudComponent> hudComponents = new ConcurrentHashMap<Long, HudComponent>();
+
+    private static long availableIdGo = 0;
+    private static long availableIdHud = 0;
 
     /**
      * This variable is used to slow down the forces.
@@ -67,6 +70,10 @@ public class World {
 
             gameObject.update();
         }
+
+        for(Map.Entry<Long, HudComponent> hudComponent : hudComponents.entrySet()){
+            hudComponent.getValue().update();
+        }
     }
 
     public static void render(){
@@ -79,6 +86,11 @@ public class World {
         // Go through all the entities and render them
         for(Map.Entry<Long, GameObject> gameObject : gameObjects.entrySet()){
             gameObject.getValue().render();
+        }
+
+        // Go through all the HUD components and render them
+        for(Map.Entry<Long, HudComponent> hudComponent : hudComponents.entrySet()){
+            hudComponent.getValue().render();
         }
     }
 
@@ -193,9 +205,19 @@ public class World {
             throw new IllegalArgumentException("Can't add a null game object to the world.");
         }
 
-        gameObjects.put(availableId, gameObject);
-        availableId ++;
-        return availableId - 1;
+        gameObjects.put(availableIdGo, gameObject);
+        availableIdGo ++;
+        return availableIdGo - 1;
+    }
+
+    public static long addHudComponent(HudComponent hudComponent){
+        if(hudComponent == null){
+            throw new IllegalArgumentException("Can't add a null hud component to the world.");
+        }
+
+        hudComponents.put(availableIdHud, hudComponent);
+        availableIdHud ++;
+        return availableIdHud - 1;
     }
 
     /**
@@ -212,7 +234,7 @@ public class World {
      * @return the game object if it was found.
      */
     public static GameObject getGameObject(long id){
-        if(id >= availableId){
+        if(id >= availableIdGo){
             throw new IllegalArgumentException("The id given is greater or equal to the first available id. The gameobject is unknown.");
         }else{
             GameObject gameObject = gameObjects.get(id);

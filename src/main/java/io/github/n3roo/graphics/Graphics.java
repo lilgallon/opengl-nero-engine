@@ -1,8 +1,12 @@
 package io.github.n3roo.graphics;
 
 import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.util.awt.TextRenderer;
 import com.jogamp.opengl.util.texture.Texture;
 import io.github.n3roo.resources.ImageResource;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 public class Graphics {
 
@@ -17,6 +21,9 @@ public class Graphics {
 
     private static float xTranslation;
     private static float yTranslation;
+
+    public static float textHeight = 0;
+    public static float textWidth = 0;
 
     /**
      * It draws a rectangle (width ; height).
@@ -152,6 +159,22 @@ public class Graphics {
         gl.glTranslatef(-xTranslation, -yTranslation, 0);
     }
 
+    public static void drawText(String text, int x, int y){
+        int xShift = EventListener.glAutoDrawable.getSurfaceWidth() / 2;
+        int yShift = EventListener.glAutoDrawable.getSurfaceHeight() / 2;
+        EventListener.textRenderer.beginRendering(
+                EventListener.glAutoDrawable.getSurfaceWidth(),
+                EventListener.glAutoDrawable.getSurfaceHeight()
+        );
+        EventListener.textRenderer.setColor(red, green, blue, alpha);
+        EventListener.textRenderer.draw(text, x + (int) xTranslation + xShift, y + (int) yTranslation + yShift);
+        EventListener.textRenderer.endRendering();
+
+        Rectangle2D bounds = EventListener.textRenderer.getBounds(text);
+        textWidth = (float) bounds.getWidth();
+        textHeight = (float) bounds.getHeight();
+    }
+
     /**
      * It changes the color.
      * Values need to be in [0; 1].
@@ -180,4 +203,17 @@ public class Graphics {
         yTranslation = ty;
     }
 
+    public static void setFont(String name, int style, int size){
+        EventListener.textRenderer = new TextRenderer(new Font(name, style, size));
+    }
+
+    public static void setFontSize(int size){
+        EventListener.textRenderer = new TextRenderer(
+                new Font(
+                    EventListener.textRenderer.getFont().getName(),
+                    EventListener.textRenderer.getFont().getSize(),
+                    size
+                )
+        );
+    }
 }

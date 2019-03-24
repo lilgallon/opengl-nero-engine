@@ -1,5 +1,6 @@
 package org.example.physics;
 
+import io.github.n3roo.hud.components.FpsCounter;
 import io.github.n3roo.world.World;
 import org.example.physics.world.entities.Pentagon;
 import org.example.physics.world.entities.Platform;
@@ -14,5 +15,8 @@ public class PhysicsGame {
         // Entities
         long triangleId = World.addGameObject(new Triangle());
         long pentagonId = World.addGameObject(new Pentagon());
+
+        // Hud components
+        long fpsCounterId = World.addHudComponent(new FpsCounter());
     }
 }
