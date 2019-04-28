@@ -9,7 +9,7 @@ public class Pentagon extends GameObject {
 
     public Pentagon(){
         position = new Vec2f(-0.5f, 0);
-        rigidBody = new RigidBody(new Polygon(0.5f, 5, 0), 0);
+        rigidBody = new RigidBody(new Polygon(0.5f, 5, 0), 20);
         drawRigidBody = true;
     }
 

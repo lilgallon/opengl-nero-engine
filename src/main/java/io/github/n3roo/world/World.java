@@ -124,6 +124,26 @@ public class World {
                 Vec2f overlapVec = polygonOverlapSat(go1, go2);
 
                 if(overlapVec != null){
+                    // Mass handling
+                    float go1Mass = go1.getRigidBody().getMass();
+                    float go2Mass = go2.getRigidBody().getMass();
+                    float percentage;
+                    if(go2Mass == 0 && go1Mass == 0){
+                        // Prevent division by 0
+                        percentage = 0f;
+                    }else if(go1Mass < 0){
+                        // Infinite mass (it won't move)
+                        percentage = 0f;
+                    }else if(go2Mass < 0 || go1Mass == 0){
+                        // The other one has infinite mass (g1 will move)
+                        percentage = 1f;
+                    }else{
+                        // Otherwise, we take the right percentage
+                        percentage = (go2Mass * 100 / (go1Mass + go2Mass) ) / 100;
+                    }
+
+                    System.out.println(percentage + " " + overlapVec + " " + go1.getClass().getSimpleName());
+                    overlapVec.multiply(percentage);
                     go1.position.add(overlapVec);
                 }
             }

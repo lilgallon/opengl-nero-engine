@@ -15,7 +15,7 @@ public class Triangle extends GameObject {
 
     public Triangle(){
         position = new Vec2f(0.5f, 0);
-        rigidBody = new RigidBody(new Polygon(0.3f, 3, 0), 0);
+        rigidBody = new RigidBody(new Polygon(0.3f, 3, 0), 2);
         drawRigidBody = true;
     }
 
